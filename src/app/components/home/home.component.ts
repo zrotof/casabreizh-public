@@ -1,4 +1,10 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+
+//importing aos an animation library
+declare var AOS: any;
+
+
+//importing fontawesome icons
 import { faChevronLeft, faChevronRight, faMapMarkerAlt, faCalendarAlt, faPhone, faEnvelope, faPaperPlane, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { ProduitsService } from '../../services/produits.service';
@@ -75,6 +81,7 @@ export class HomeComponent implements OnInit {
   constructor( private produitService: ProduitsService, private modalService: NgbModal ) { }
 
   ngOnInit(): void {
+    AOS.init();
     this.slideFunction(this.counter);
     this.getPoissonsArray();
     this.getDessertArray();
@@ -263,8 +270,6 @@ export class HomeComponent implements OnInit {
 
 
   //Handling click on product
-
-
   openProduit(typeProduit: string, index: number){
 
     const produitRef = this.modalService.open(ProduitComponent);

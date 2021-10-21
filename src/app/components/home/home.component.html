@@ -107,8 +107,8 @@
             </div>
            
             <div class="about-content-media">
-                <img src="../../../assets/img/casa-about.png" alt="image du chef Atho">
-                <span></span>
+                <img src="../../../assets/img/casa-about.png" alt="image du chef Atho" data-aos="fade-up">
+                <span data-aos="fade-down"></span>
                 <span> Chef ATHO</span>
             </div>
         </div>
@@ -128,8 +128,8 @@
         <div class="commandez-content">
             <div class="commandez-content-apps">
 
-                <img src="../../../assets/img/casa-uber-eat.png" alt="Retrouvez Casabreizh sur uber eat">
-                <img src="../../../assets/img/casa-just-eat.png" alt="Retrouvez Casabreizh sur just eat">
+                <img data-aos="fade-right" src="../../../assets/img/casa-uber-eat.png" alt="Retrouvez Casabreizh sur uber eat">
+                <img data-aos="fade-left" src="../../../assets/img/casa-just-eat.png" alt="Retrouvez Casabreizh sur just eat">
               
             </div>
         </div>
@@ -146,10 +146,10 @@
         <div class="carte-tabs">
 
             <div class="tabs-menu">
-                <span (click)="chooseTab(1)" class="tab-menu active-tab-menu">Formules</span>
-                <span (click)="chooseTab(2)" class="tab-menu">Plats</span>
-                <span (click)="chooseTab(3)" class="tab-menu">Boissons</span>
-                <span (click)="chooseTab(4)" class="tab-menu">Desserts</span>
+                <span (click)="chooseTab(1)" class="tab-menu active-tab-menu" data-aos="fade-right">Formules</span>
+                <span (click)="chooseTab(2)" class="tab-menu" data-aos="fade-right">Plats</span>
+                <span (click)="chooseTab(3)" class="tab-menu" data-aos="fade-left">Boissons</span>
+                <span (click)="chooseTab(4)" class="tab-menu" data-aos="fade-left">Desserts</span>
             </div>
 
             <div class="tabs-pages">
@@ -159,7 +159,7 @@
 
                 <div class="tabs-pages-conteneur">
                     <div class="tab-page  active-tab-page">
-                        <img class="cart-image" src="../../../assets/img/casa-carte.png" alt="la carte du restaurant Casabreizh">
+                        <img class="cart-image" alt="la carte du restaurant Casabreizh">
                     </div>
 
 <!-- formules bloc end -->
@@ -173,14 +173,14 @@
                         <div class="produit-bloc">
                             <div class="produit" *ngFor="let poisson of poissonsArray; let index= index" (click)="openProduit('poisson' ,index)">
                                 <div class="produit-bloc-image-text">
-                                    <img class="produit-image" src="{{poisson.imageProduit}}">
+                                    <img class="produit-image" data-aos="fade-up" src="{{poisson.imageProduit}}">
                                     <span class="produit-text" *ngIf="poisson.etatProduit == false">Épuisé</span>
                                 </div>
                                 <div class="produit-info">
                                     <span class="produit-info-title">{{poisson.nomProduit}}</span>
                                     <span class="produit-info-description">{{poisson.descriptionProduit}}</span>
                                     
-                                    <span class="produit-info-price"><fa-icon [icon]="faInfoCircle"></fa-icon> {{poisson.prixProduit}}</span>
+                                    <span class="produit-info-price"><fa-icon [icon]="faInfoCircle"></fa-icon >{{poisson.prixProduit}}</span>
                                     
                                 </div>
                             </div>
@@ -305,7 +305,7 @@
 
             <div class="testimony-caroussel-container">
 
-                <div class="testimony-element" *ngFor="let testimony of testimoniesArray" >
+                <div class="testimony-element" data-aos="fade-up" data-aos-duration="1000" *ngFor="let testimony of testimoniesArray" >
             
                     <span class="testimony-element-title"> {{testimony.nom}} </span>
 
@@ -324,7 +324,7 @@
         </div>
     </div>
         
-    <span class="testimony-call-to-action">Laissez nous un commentaire</span>
+    <span class="testimony-call-to-action" data-aos="fade-up"  >Laissez nous un commentaire</span>
 
 </div>
 
@@ -342,7 +342,7 @@
     </div>
 
     <div class="contact-bloc-info-form">
-        <div class="contact-info">
+        <div class="contact-info" data-aos="fade-up" data-aos-duration="1000">
             <div class="emplacement">
                 <span><fa-icon [icon]="faMapMarkerAlt"></fa-icon></span>
                 <span >Emplacement</span>
@@ -364,7 +364,7 @@
                 <span>contact@casabreizh.fr</span>
             </div>
         </div>
-        <form>
+        <form data-aos="fade-down" data-aos-duration="1000">
             <div class="name-email">
                 <div class="name-bloc">
                     <input id="name-input" type="text" placeholder="Nom">
