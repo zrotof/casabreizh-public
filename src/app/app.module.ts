@@ -8,6 +8,22 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProduitComponent } from './components/produit/produit.component';
 
+import { ExtraOptions, RouterModule, Routes } from "@angular/router";
+
+const routes: Routes = [
+  {
+    path: "",
+    component: HomeComponent
+  }
+];
+
+const routerOptions: ExtraOptions = {
+  useHash: false,
+  anchorScrolling: "enabled",
+  onSameUrlNavigation: 'reload',
+  scrollOffset: [50, 50]
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,14 +34,14 @@ import { ProduitComponent } from './components/produit/produit.component';
     BrowserModule,
     FontAwesomeModule,
     GoogleMapsModule,
-    NgbModule
+    NgbModule,
+    RouterModule,
+    RouterModule.forRoot(routes, routerOptions)
   ],
   entryComponents: [
     ProduitComponent
   ],
-  providers: [
-    NgbActiveModal
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

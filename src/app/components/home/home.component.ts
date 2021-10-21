@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
+import { filter } from 'rxjs/operators';
+
 //importing aos an animation library
 declare var AOS: any;
 
@@ -16,6 +18,7 @@ import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProduitComponent } from '../produit/produit.component';
+import { RouterModule, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -57,7 +60,7 @@ export class HomeComponent implements OnInit {
   };
 
   //map centré sur
-  center: google.maps.LatLngLiteral = {lat:48.121950, lng:-1.662520 };
+  //center: google.maps.LatLngLiteral = {lat:48.121950, lng:-1.662520 };
   
   marker =
     {
@@ -66,7 +69,7 @@ export class HomeComponent implements OnInit {
     },
     info: "CASABREIZH",
     options: {
-      animation: google.maps.Animation.DROP
+ //     animation: google.maps.Animation.DROP
     }
   } ;
 
@@ -78,7 +81,7 @@ export class HomeComponent implements OnInit {
   isBurgerMenuClicked: boolean = false;
 
 
-  constructor( private produitService: ProduitsService, private modalService: NgbModal ) { }
+  constructor( private produitService: ProduitsService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
     AOS.init();
@@ -86,10 +89,13 @@ export class HomeComponent implements OnInit {
     this.getPoissonsArray();
     this.getDessertArray();
     this.getTestimonies();
+    this.redirectOnLoad();
+    
+    
   }
 
   @HostListener('window:scroll', ['$event'])
-
+//Changing backgroung on scroll
   onWindowScroll() {
       let header = <HTMLElement>document.querySelector('header');
       if (window.pageYOffset > header.clientHeight) {
@@ -162,8 +168,8 @@ export class HomeComponent implements OnInit {
 
   //Setting the link 
   //Toggle screen menu when on small devices 
-  setActiveClass(linkNumber: number){
-    var myLinks = <NodeListOf<HTMLElement>>document.querySelectorAll("li a");
+  setActiveClassAndNavigate(linkNumber: number, targetAnchor: string){
+    var myLinks = <NodeListOf<HTMLElement>>document.querySelectorAll("li span");
     var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
     var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
       
@@ -179,6 +185,50 @@ export class HomeComponent implements OnInit {
       inputstatus.checked = false;
 
     }
+
+    this.navigateToAnchor(targetAnchor);
+  }
+
+
+  //Redirect to the good link on load so that this link will be acttivated
+  redirectOnLoad(){
+    var nav: NavigationEnd ;
+    var currentLinkNumber =1;
+    var currentAnchorTag ="accueil";
+
+    console.log(this.router)
+/*
+  
+    if(nav == "/#a-propos"){
+      currentLinkNumber = 2;
+      currentAnchorTag = "a-propos"
+    }
+
+    else if(nav == "/#commandez"){
+      currentLinkNumber = 3;
+      currentAnchorTag = "commandez"
+    }
+
+    else if(nav == "/#carte"){
+      currentLinkNumber = 4;
+      currentAnchorTag = "carte"
+    }
+
+    else if(nav == "/#temoignages"){
+      currentLinkNumber = 5;
+      currentAnchorTag = "temoignages"
+    }
+
+    else if(nav == "/#contact"){
+      currentLinkNumber = 6;
+      currentAnchorTag = "contact"
+    }
+
+    console.log(nav)
+    console.log(currentLinkNumber, currentAnchorTag)
+
+    this.setActiveClassAndNavigate(currentLinkNumber, currentAnchorTag)
+    */
   }
 
 
@@ -278,5 +328,12 @@ export class HomeComponent implements OnInit {
       produitRef.componentInstance.currentProduit = this.poissonsArray[index];
     }
   }
+
+
+  //Navigate to an anchor
+  navigateToAnchor(targetAnchor: string){
+    this.router.navigate([], { fragment: targetAnchor });
+  }
+
 }
 
