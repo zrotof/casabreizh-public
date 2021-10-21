@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { filter } from 'rxjs/operators';
+import { filter, first } from 'rxjs/operators';
 
 //importing aos an animation library
 declare var AOS: any;
@@ -81,32 +81,166 @@ export class HomeComponent implements OnInit {
   isBurgerMenuClicked: boolean = false;
 
 
+
+   currentLinkNumber = 1;
+   currentAnchorTag ="accueil";
+
+
   constructor( private produitService: ProduitsService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+
+   this.redirectOnLoad();
+
     AOS.init();
+
     this.slideFunction(this.counter);
     this.getPoissonsArray();
     this.getDessertArray();
     this.getTestimonies();
-    this.redirectOnLoad();
-    
-    
+
   }
 
   @HostListener('window:scroll', ['$event'])
-//Changing backgroung on scroll
+
+//Changing backgroung on scroll of header
+//changing the rigth active link when scolling
+
   onWindowScroll() {
       let header = <HTMLElement>document.querySelector('header');
+      let accueil = <HTMLElement>document.querySelector('#accueil');
+      let about = <HTMLElement>document.querySelector('.about');
+      let commandez = <HTMLElement>document.querySelector('.a-emporter');
+      let carte = <HTMLElement>document.querySelector('.carte');
+      let temoignages = <HTMLElement>document.querySelector('.testinony-bloc');
+      let contact = <HTMLElement>document.querySelector('.contact-bloc');
+
+
+      //Setting the background color of the header to black after scroll
       if (window.pageYOffset > header.clientHeight) {
         header.classList.add('navbar-background-on-scroll');
       } else {
         header.classList.remove('navbar-background-on-scroll');
       }
+
+
+      //changinthe color of link
+      if(window.pageYOffset < accueil.offsetHeight -30){
+
+        this.setActiveLink(1);
+      }
+      
+      if ((window.pageYOffset < commandez.offsetTop) && window.pageYOffset > about.offsetTop - header.clientHeight) {
+        
+        this.setActiveLink(2);
+      }
+
+      if ((window.pageYOffset < carte.offsetTop) && window.pageYOffset > commandez.offsetTop - header.clientHeight) {
+        
+        this.setActiveLink(3);
+      }
+
+      if ((window.pageYOffset < temoignages.offsetTop) && window.pageYOffset > carte.offsetTop - header.clientHeight) {
+        
+        this.setActiveLink(4);
+      }
+
+      if ((window.pageYOffset < contact.offsetTop) && window.pageYOffset > temoignages.offsetTop - header.clientHeight) {
+        
+        this.setActiveLink(5);
+      }
+
+      if (window.pageYOffset > contact.offsetTop - header.clientHeight) {
+        
+        this.setActiveLink(6);
+      }
+  }
+
+//Setting the active link
+  setActiveLink(linkNumber: number){
+
+    var myLinks = <NodeListOf<HTMLElement>>document.querySelectorAll("li span");
+    var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
+    var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
+    
+    myLinks.forEach(element =>{
+      element.classList.remove("active-link");
+    })
+
+    myLinks[linkNumber - 1].classList.add("active-link");
+
+    // À chaque clique sur l'input on vérifie si l'input est cochée
+    if(inputstatus.checked === true){
+      navSmallScreen.classList.toggle("toggle-nav");
+      inputstatus.checked = false;
     }
+  }
+
+  //Navigate to an anchor
+  navigateToAnchor(targetAnchor: string){
+    this.router.navigate([], { fragment: targetAnchor });
+  }
+
+
+  //Redirect to the good link on load so that this link will be acttivated
+   redirectOnLoad(){
+
+     this.router.events.pipe(first()).subscribe( event => {
+     if(event instanceof NavigationEnd){
 
 
 
+      var nav = this.router.url
+
+      console.log(nav);
+
+      if(nav == "/#a-propos"){
+        this.currentLinkNumber = 2;
+        this.currentAnchorTag = "a-propos"
+      }
+  
+      else if(nav == "/#commandez"){
+        this.currentLinkNumber = 3;
+        this.currentAnchorTag = "commandez"
+      }
+  
+      else if(nav == "/#carte"){
+        this.currentLinkNumber = 4;
+        this.currentAnchorTag = "carte"
+      }
+  
+      else if(nav == "/#temoignages"){
+        this.currentLinkNumber = 5;
+        this.currentAnchorTag = "temoignages"
+      }
+  
+      else if(nav == "/#contact"){
+        this.currentLinkNumber = 6;
+        this.currentAnchorTag = "contact"
+      }
+
+
+    }
+    this.setActiveLinkAndNavigate(this.currentLinkNumber, this.currentAnchorTag);
+
+   }
+
+   )   
+  }
+
+    //Setting the link 
+  //Toggle screen menu when on small devices 
+  setActiveLinkAndNavigate(linkNumber: number, targetAnchor: string){
+
+    this.setActiveLink(linkNumber);
+    this.navigateToAnchor(targetAnchor);
+
+  }
+
+
+
+
+  //Function handling the slider
   slideFunction(slideNumber: number): void{
     var mySlides = <NodeListOf<HTMLElement>>document.querySelectorAll(".mySlide");
     var myDots = <NodeListOf<HTMLElement>>document.querySelectorAll(".dot");
@@ -132,7 +266,6 @@ export class HomeComponent implements OnInit {
     mySlides[this.counter - 1].style.display ="block";
 
     myDots[this.counter - 1].classList.add("active-dot");
-
 
   }
 
@@ -165,73 +298,7 @@ export class HomeComponent implements OnInit {
     this.timer = setInterval(this.autoSlide,8000);
   }
 
-
-  //Setting the link 
-  //Toggle screen menu when on small devices 
-  setActiveClassAndNavigate(linkNumber: number, targetAnchor: string){
-    var myLinks = <NodeListOf<HTMLElement>>document.querySelectorAll("li span");
-    var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
-    var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
-      
-    myLinks.forEach(element =>{
-      element.classList.remove("active-link");
-    })
-
-    myLinks[linkNumber - 1].classList.add("active-link");
-
-    // À chaque clique sur l'input on vérifie si l'input est cochée
-    if(inputstatus.checked === true){
-      navSmallScreen.classList.toggle("toggle-nav");
-      inputstatus.checked = false;
-
-    }
-
-    this.navigateToAnchor(targetAnchor);
-  }
-
-
-  //Redirect to the good link on load so that this link will be acttivated
-  redirectOnLoad(){
-    var nav: NavigationEnd ;
-    var currentLinkNumber =1;
-    var currentAnchorTag ="accueil";
-
-    console.log(this.router)
-/*
-  
-    if(nav == "/#a-propos"){
-      currentLinkNumber = 2;
-      currentAnchorTag = "a-propos"
-    }
-
-    else if(nav == "/#commandez"){
-      currentLinkNumber = 3;
-      currentAnchorTag = "commandez"
-    }
-
-    else if(nav == "/#carte"){
-      currentLinkNumber = 4;
-      currentAnchorTag = "carte"
-    }
-
-    else if(nav == "/#temoignages"){
-      currentLinkNumber = 5;
-      currentAnchorTag = "temoignages"
-    }
-
-    else if(nav == "/#contact"){
-      currentLinkNumber = 6;
-      currentAnchorTag = "contact"
-    }
-
-    console.log(nav)
-    console.log(currentLinkNumber, currentAnchorTag)
-
-    this.setActiveClassAndNavigate(currentLinkNumber, currentAnchorTag)
-    */
-  }
-
-
+//Handling click on tabs menu
   chooseTab(tabNumber: number){
     var myTabMenu = <NodeListOf<HTMLElement>>document.querySelectorAll(".tab-menu");
     var myTabpages = <NodeListOf<HTMLElement>>document.querySelectorAll(".tab-page");
@@ -250,13 +317,12 @@ export class HomeComponent implements OnInit {
   }
 
 
-  //Getting dessert arrays
+  //Getting fishes arrays
   getPoissonsArray(){
     this.poissonsArray = this.produitService.getPlatsPoissons();
   }
 
-
-  //Getting dessert arrays
+  //Getting desserts arrays
   getDessertArray(){
     this.dessertsArray = this.produitService.getDesserts();
   }
@@ -330,10 +396,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  //Navigate to an anchor
-  navigateToAnchor(targetAnchor: string){
-    this.router.navigate([], { fragment: targetAnchor });
-  }
+  
 
 }
 

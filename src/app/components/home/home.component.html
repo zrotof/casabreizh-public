@@ -1,18 +1,18 @@
 <div class="home" (scroll)="onWindowScroll()">
 
-    <header  >
+    <header>
 
         
-            <img (click)="navigateToAnchor('accueil')" class="logo" src="../../../assets/img/casabreizh_logo.png" alt="Logo du restaurant Casabreizh">
+            <img (click)="setActiveLinkAndNavigate(1,'accueil')" class="logo" src="../../../assets/img/casabreizh_logo.png" alt="Logo du restaurant Casabreizh">
     
             <nav class="header-right">
                 <ul>
-                    <li><span class="active-link" (click)="setActiveClassAndNavigate(1,'accueil')">Accueil</span></li>
-                    <li><span (click)="setActiveClassAndNavigate(2, 'a-propos')">A Propos</span></li>
-                    <li><span (click)="setActiveClassAndNavigate(3, 'commandez')">Commandez</span></li>
-                    <li><span (click)="setActiveClassAndNavigate(4, 'carte')">La Carte</span></li>
-                    <li><span (click)="setActiveClassAndNavigate(5, 'temoignages')">Témoignages</span></li>
-                    <li><span (click)="setActiveClassAndNavigate(6, 'contact')">Contact</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(1,'accueil')">Accueil</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(2, 'a-propos')">A Propos</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(3, 'commandez')">Commandez</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(5, 'temoignages')">Témoignages</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(6, 'contact')">Contact</span></li>
                 </ul>
             </nav>
 
@@ -34,7 +34,7 @@
                 <p>Venez découvrir des plats typiques du Sénégal comme :</p>
                 <p>le poisson Capitaine ou Baracouda grillé, le Soupoukandja (boeuf sauce gombo), le Mafé (boeuf sauce arachide), le Tiéboudjène, riz au poisson  plat national du Sénégal</p>
                 
-                <span  (click)="setActiveClassAndNavigate(4, 'carte')">La Carte</span>
+                <span  (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <div class="slider-text">
                 <h1>Un Accueil Chaleureux</h1>
                 <p>Le Casa Breizh vous réserve un accueil des plus convivial dans un cadre agréable et dépaysant. Du mardi au samedi, le matin comme le soir</p>
-                <span (click)="setActiveClassAndNavigate(4, 'carte')">La Carte</span>
+                <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
              </div>
         </div>
 
@@ -51,7 +51,7 @@
                 <h1>Une Cuisine Originale</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <span (click)="setActiveClassAndNavigate(4, 'carte')">La Carte</span>
+                <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
             </div>
         </div>
 
