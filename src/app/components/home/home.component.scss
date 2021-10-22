@@ -1767,6 +1767,60 @@ $colorGreen: #046904;
 
 
 
+@media all and (max-width: 419px){
+    .carte{
+
+        .carte-tabs{
+
+            .tabs-pages{
+
+                .tabs-pages-conteneur{
+
+                    .tab-page{
+                    
+                        .produit-bloc{
+
+                            padding: 0 !important;
+
+                            .produit{
+                                width: 100% !important;
+                                height: 90px !important;
+                                flex-direction: row !important;
+                                margin: 0 0 30px 0 !important;
+
+                                .produit-bloc-image-text{
+
+                                    width: 140px !important;
+
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //testimony
