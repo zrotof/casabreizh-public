@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-
-import { filter, first } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { catchError, filter, first, map } from 'rxjs/operators';
 
 //importing aos an animation library
 declare var AOS: any;
@@ -18,7 +18,10 @@ import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProduitComponent } from '../produit/produit.component';
-import { RouterModule, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd} from '@angular/router';
+import { Observable, of } from 'rxjs';
+
+declare var google: { maps: { Animation: { DROP: any; }; }; };
 
 @Component({
   selector: 'app-home',
@@ -28,11 +31,7 @@ import { RouterModule, Router, NavigationEnd, ActivatedRoute } from '@angular/ro
 export class HomeComponent implements OnInit {
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap | undefined;
-  @ViewChild(MapInfoWindow, { static: false })
-  info!: MapInfoWindow;
-
-
-
+  @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
 
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
@@ -53,6 +52,7 @@ export class HomeComponent implements OnInit {
 
   //Map options
   options: google.maps.MapOptions = {
+    center: {lat:48.121950, lng:-1.662520 },
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: true,
@@ -60,7 +60,6 @@ export class HomeComponent implements OnInit {
   };
 
   //map centré sur
-  //center: google.maps.LatLngLiteral = {lat:48.121950, lng:-1.662520 };
   
   marker =
     {
@@ -68,15 +67,8 @@ export class HomeComponent implements OnInit {
       lat:48.121950, lng:-1.662520
     },
     info: "CASABREIZH",
-    options: {
- //     animation: google.maps.Animation.DROP
-    }
+  
   } ;
-
-  infoContent = "";
-
-
-
 
   isBurgerMenuClicked: boolean = false;
 
@@ -85,8 +77,19 @@ export class HomeComponent implements OnInit {
    currentLinkNumber = 1;
    currentAnchorTag ="accueil";
 
+//variable that allow to know ifthe API of google is correctly load
+   apiLoaded: Observable<boolean> ;
 
-  constructor( private produitService: ProduitsService, private modalService: NgbModal, private router: Router, private activatedRoute: ActivatedRoute ) { }
+  constructor( httpClient: HttpClient, private produitService: ProduitsService, 
+    private modalService: NgbModal, 
+    private router: Router,
+     ) {
+      this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=', 'callback')
+      .pipe(
+        map(() => true),
+        catchError(() => of(false)),
+      );
+      }
 
    ngOnInit(): void {
 
@@ -106,7 +109,7 @@ export class HomeComponent implements OnInit {
 //Changing backgroung on scroll of header
 //changing the rigth active link when scolling
 
-  onWindowScroll() {
+  onWindowScroll( ) {
       let header = <HTMLElement>document.querySelector('header');
       let accueil = <HTMLElement>document.querySelector('#accueil');
       let about = <HTMLElement>document.querySelector('.about');
@@ -237,7 +240,25 @@ export class HomeComponent implements OnInit {
 
   }
 
+  //Handling click on burger menu
+  onBurgerMenu(){
+    var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
+    var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
+    var menuText = <NodeListOf<HTMLElement>>document.querySelectorAll("a span");
 
+    // À chaque clique sur l'input on vérifie si l'input est cochée
+    if(inputstatus.checked === true){
+      
+      navSmallScreen.classList.toggle("toggle-nav")
+
+      this.isBurgerMenuClicked = true;
+
+    }
+    else{
+      navSmallScreen.classList.toggle("toggle-nav");
+      
+    }
+  }
 
 
   //Function handling the slider
@@ -328,6 +349,17 @@ export class HomeComponent implements OnInit {
   }
 
 
+  //Handling click on product
+  openProduit(typeProduit: string, index: number){
+
+      const produitRef = this.modalService.open(ProduitComponent);
+      
+      if(typeProduit == "poisson"){
+        produitRef.componentInstance.currentProduit = this.poissonsArray[index];
+      }
+  }
+  
+
   // Handling testimony arrow click
 
   testimonyClickPrev(){
@@ -349,54 +381,12 @@ export class HomeComponent implements OnInit {
     this.testimoniesArray =  this.produitService.getTestimonies();
   }
 
-
-
-
-
-  //Google Map function
-  openInfo(marker: MapMarker, info: string) {
-    this.infoContent = info;
+  //Google Map function  displaying information when red icon on the map is clicked
+  openMapInfo(marker: MapMarker) {
      this.info.open(marker);
   }
 
 
-  //Handling click on burger menu
-  onBurgerMenu(){
-    var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
-    var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
-    var menuText = <NodeListOf<HTMLElement>>document.querySelectorAll("a span");
-
-    // À chaque clique sur l'input on vérifie si l'input est cochée
-    if(inputstatus.checked === true){
-      
-      navSmallScreen.classList.toggle("toggle-nav")
-
-      this.isBurgerMenuClicked = true;
-
-    }
-    else{
-      navSmallScreen.classList.toggle("toggle-nav");
-      
-    }
-
-    
-  }
-
-
-
-
-  //Handling click on product
-  openProduit(typeProduit: string, index: number){
-
-    const produitRef = this.modalService.open(ProduitComponent);
-    
-    if(typeProduit == "poisson"){
-      produitRef.componentInstance.currentProduit = this.poissonsArray[index];
-    }
-  }
-
-
-  
 
 }
 

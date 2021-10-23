@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -36,6 +36,8 @@ const routerOptions: ExtraOptions = {
     GoogleMapsModule,
     NgbModule,
     RouterModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
     RouterModule.forRoot(routes, routerOptions)
   ],
   entryComponents: [

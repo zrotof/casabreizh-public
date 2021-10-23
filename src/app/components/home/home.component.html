@@ -8,7 +8,7 @@
             <nav class="header-right">
                 <ul>
                     <li><span (click)="setActiveLinkAndNavigate(1,'accueil')">Accueil</span></li>
-                    <li><span (click)="setActiveLinkAndNavigate(2, 'a-propos')">A Propos</span></li>
+                    <li><span (click)="setActiveLinkAndNavigate(2, 'a-propos')">À Propos</span></li>
                     <li><span (click)="setActiveLinkAndNavigate(3, 'commandez')">Commandez</span></li>
                     <li><span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span></li>
                     <li><span (click)="setActiveLinkAndNavigate(5, 'temoignages')">Témoignages</span></li>
@@ -394,19 +394,19 @@
 <!-- contact bloc end -->
 
 <!-- google map bloc start -->
-<!--
-<google-map height="500px" width="100%" [options]="options" [center]="center">
-    <map-marker #markerElem = "mapMarker"
-        [position]="marker.position" [options]="marker.options" (mapClick)="openInfo(markerElem, marker.info)">
-    </map-marker>
 
-    <map-info-window >
-        <div [innerHTML]="infoContent"></div>
-    </map-info-window>
-</google-map>
+<div *ngIf="apiLoaded | async">
+    <google-map height="500px" width="100%" [options]="options">
+        <map-marker #markerElem = "mapMarker"
+            [position]="marker.position" (mapClick)="openMapInfo(markerElem)">
+        </map-marker>
 
+        <map-info-window >
+            <div [innerHTML]="marker.info"></div>
+        </map-info-window>
+    </google-map>
+</div>
 
--->
 <!-- google map bloc end -->
 
 <!-- footer bloc start -->

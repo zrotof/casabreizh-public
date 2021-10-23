@@ -1203,7 +1203,6 @@ $colorGreen: #046904;
 
             ul{
                 flex-direction: column;
-                font-size: 1.3em;
                 letter-spacing: 5px;
                 align-items: center;
                 position: absolute;
@@ -1213,6 +1212,10 @@ $colorGreen: #046904;
 
                 li{
                     margin: 15px 0 15px 0;  
+
+                    span{
+                        font-size: 1.3em;
+                    }
                 }
             }
         }
@@ -1768,6 +1771,23 @@ $colorGreen: #046904;
 
 
 @media all and (max-width: 419px){
+
+    header{
+        nav{
+           ul{
+               li{
+                   span{
+                    font-size: 1.1em !important;
+                   }
+               }
+           }
+        }
+    }
+
+
+
+
+
     .carte{
 
         .carte-tabs{
