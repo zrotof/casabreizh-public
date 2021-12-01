@@ -77,7 +77,14 @@ export class HomeComponent implements OnInit {
    currentLinkNumber = 1;
    currentAnchorTag ="accueil";
 
-//variable that allow to know ifthe API of google is correctly load
+
+   touchstartX: number = 0;
+   touchstartY: number = 0;
+   touchendX: number = 0;
+   touchendY: number = 0;
+
+
+//variable that allow to know if the API of google is correctly load
    apiLoaded: Observable<boolean> ;
 
   constructor( httpClient: HttpClient, private produitService: ProduitsService, 
@@ -89,7 +96,10 @@ export class HomeComponent implements OnInit {
         map(() => true),
         catchError(() => of(false)),
       );
-      }
+  }
+
+
+
 
    ngOnInit(): void {
 
@@ -102,11 +112,27 @@ export class HomeComponent implements OnInit {
     this.getDessertArray();
     this.getTestimonies();
 
+    //Hangling swipe event
+  (<HTMLElement>document.querySelector('.slider')).addEventListener('touchstart',  (event) => {
+    this.touchstartX = event.changedTouches[0].screenX;
+    this.touchstartY = event.changedTouches[0].screenY;
+  }, false);
+
+  (<HTMLElement>document.querySelector('.slider')).addEventListener('touchend',  (event) => {
+
+    
+
+    this.touchendX = event.changedTouches[0].screenX;
+    this.touchendY = event.changedTouches[0].screenY;
+    this.handleGesture();
+}, false);
+
+
   }
 
   @HostListener('window:scroll', ['$event'])
 
-//Changing backgroung on scroll of header
+//Changing backgroung on scroll of header menu 
 //changing the rigth active link when scolling
 
   onWindowScroll( ) {
@@ -244,7 +270,6 @@ export class HomeComponent implements OnInit {
   onBurgerMenu(){
     var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
     var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
-    var menuText = <NodeListOf<HTMLElement>>document.querySelectorAll("a span");
 
     // À chaque clique sur l'input on vérifie si l'input est cochée
     if(inputstatus.checked === true){
@@ -288,13 +313,15 @@ export class HomeComponent implements OnInit {
 
     myDots[this.counter - 1].classList.add("active-dot");
 
+
+    //after sliding we reset the timer
+    this.resetTimer();
   }
 
   //chage slide to the next slide after 8 secondes 
   autoSlide() {
     this.counter += 1;
-    //console.log("auto work");
-    //this.slideFunction(this.counter);
+    this.slideFunction(this.counter);
   }
 
    //Show the next or prev slide when click on plus or minus sign arrows
@@ -316,8 +343,23 @@ export class HomeComponent implements OnInit {
   //reset the timer to 0 and relaunch the autoSlide funtion
   resetTimer():void{
     clearInterval(this.timer);
-    this.timer = setInterval(this.autoSlide,8000);
+    this.timer = setInterval(()=>{this.autoSlide()},8000);
   }
+
+
+   handleGesture() {
+    if (this.touchendX < this.touchstartX) {
+        this.clickOnArrow(-1);
+    }
+
+    if (this.touchendX > this.touchstartX) {
+        this.clickOnArrow(+1);
+
+    }
+}
+
+
+
 
 //Handling click on tabs menu
   chooseTab(tabNumber: number){
