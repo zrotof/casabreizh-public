@@ -6,9 +6,13 @@ import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProduitComponent } from './components/produit/produit.component';
+import { SwiperModule } from 'swiper/angular';
 
+
+import { ProduitComponent } from './components/produit/produit.component';
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const routes: Routes = [
   {
@@ -28,7 +32,9 @@ const routerOptions: ExtraOptions = {
   declarations: [
     AppComponent,
     HomeComponent,
-    ProduitComponent
+    ProduitComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,8 @@ const routerOptions: ExtraOptions = {
     RouterModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    RouterModule.forRoot(routes, routerOptions)
+    RouterModule.forRoot(routes, routerOptions),
+    SwiperModule
   ],
   entryComponents: [
     ProduitComponent

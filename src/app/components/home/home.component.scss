@@ -1,3 +1,8 @@
+@import 'swiper/scss';
+@import 'swiper/scss/effect-fade';
+@import 'swiper/scss/pagination';
+
+
 $colorBlue: #115F98;
 $colorRed: #E9121D;
 $colorGlod: #EEC66C;
@@ -9,65 +14,6 @@ $colorGreen: #046904;
 .home{
     width: 100%;
     color: $colorBlack;
-    header{
-        display: flex;
-        justify-content: space-between ;
-        align-items: center;
-        width: 100%;
-        position: fixed;
-        height: 5.5em;
-        z-index: 3;
-        padding: 10px 7%;
-
-    
- 
-            .logo{
-                height: 100%;  
-                cursor: pointer;     
-            }
-    
-        .header-right{
-            display: flex;
-            align-items: center;
-            color: white;
-            font-weight: 550;   
-    
-            ul{
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-end;
-            
-                li{
-                    cursor: pointer;
-                    margin-left: 15px;
-
-                    span{
-                        text-decoration: none;
-                        padding: 5px 8px;
-                        color: white;
-                        font-weight: 550;
-                    }
-    
-                    .active-link, span:hover{
-                        background-color: $colorRed;
-                        border-radius: 5px;
-                        transition: all 0.3s ease-in-out;
-    
-                    }
-                }
-            }
-        }
-
-        .burger{
-            display: none;
-        }
-    }
-    .navbar-background-on-scroll{
-        background-color: black;
-        transition: all 0.3s ease-in;
-    }
-
-
 
 
     .slider{
@@ -75,111 +21,102 @@ $colorGreen: #046904;
         width: 100%;
         height: 100vh;
         position: relative;
-
-        .mySlide{
-
-            overflow: hidden;
-            height: 100vh;
-            display:inline-block;
-
-            
-            .slider-text{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                position: absolute;
-                top: 60%;
-                left: 50% ;
-                transform: translate(-50%, -50%);
-                color: white;
-
-                -webkit-animation-name: posi;
-                -webkit-animation-duration: 2s;
-                animation-name: posi;
-                animation-duration: 1.5s;
-
-                @keyframes posi {
-                    from{
-                        top: 50%;
-                    }
-                    to{
-                        top: 60%;
-                    }
-                }
-
-                & h1{
-                    margin-bottom: 10px;
-                    font-size: 2.5em;
-                    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.89);
-                    color: white;
-                }
-
-                & p{
-                    text-shadow: 1px 1px 8px rgb(0, 0, 0);
-                    font-size: 1.05em;
-                }
+        display: flex;
+        justify-content: center;
 
 
-                & span {
-                    margin-top: 15px;
-                    padding: 3px 20px;
-                    font-weight: bold;
-                    border-radius: 100px;
-                    border: solid $colorRed;
-                    background-color: white;
-                    color: $colorRed;
-                    cursor: pointer;
-                    font-size: 1.1em;
-                }
-
-                span:hover {
-                    
-                    border: solid $colorRed;
-                    background-color: $colorRed;
-                    color: white;
-                    transition: all 0.5s ease-in-out ;
-
-                }
-            }
-            
-        }
-
-        .mySlide::before{
-            content: "";
-            top: 0;
-            left:0;
-            position: absolute;
+        .swiper{
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(2, 22, 47, 0.5) 100%, rgba(0,0,0,0.20632002801120453) 100%);
 
-        }
+            .mySlide{
 
+                overflow: hidden;
+                height: 100%;
+                width: 100%;
+                background-color: black;
+                position: absolute;
+                
+                .slider-text{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 60%;
+                    left: 50% ;
+                    transform: translate(-50%, -50%);
+                    color: white;
+    
+                    h1{
+                        margin-bottom: 10px;
+                        font-size: 2.5em;
+                        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.89);
+                        color: white;
 
+                        span{
+                            color: $colorRed;
+                        }
+                    }
+    
+                    p{
+                        text-shadow: 1px 1px 8px rgb(0, 0, 0);
+                        font-size: 1.05em;
+                    }
 
-        .prev, .next{
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-            font-size: 30px;
-            padding: 5px 15px 2px 15px;
-            margin: 0 20px;
-            cursor: pointer;
-            transition: 0.1s;
-            user-select: none;
-            color: white;
-            background-color: #02162f9c;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+                    ul{
+                        list-style: inside;
+                    }
+    
+    
+                    a {
+                        margin-top: 15px;
+                        padding: 3px 20px;
+                        font-weight: 545;
+                        border-radius: 100px;
+                        background-color: white;
+                        color: $colorRed;
+                        cursor: pointer;
+                        font-size: 1.1em;
 
-            & fa-icon{
-                font-weight: 100;
-                margin: 0;
-                padding: 0;
-                height: min-content;
+                    }
+    
+                    a:hover {
+                        
+                        background-color: $colorRed;
+                        color: white;
+                        transition: all 0.5s ease-in-out ;
+                        text-decoration: none;
+                        font-weight: 600;
+
+                    }
+                }
+            }
+
+            .mySlide::before{
+                content: "";
+                top: 0;
+                left:0;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: rgb(0 6 14 / 66%);
+    
+            }
+
+            .swiper-pagination{
+                height: 17px;
+                bottom: 40px;
+    
+                .swiper-pagination-bullet{
+                    width: 17px;
+                    height: 100%;
+                    background-color: rgb(218, 218, 218);
+                }
+    
+                .swiper-pagination-bullet-active{
+                    background-color: rgba(255, 0, 64, 0.658);
+                }
             }
         }
 
@@ -187,14 +124,14 @@ $colorGreen: #046904;
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
-            background-image: url("../../../assets/img/sliders/casa-slide-one.jpeg")
+            background-image: url("../../../assets/img/sliders/casa-slide-one.jpeg");
         }
 
         .slide2{
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
-            background-image: url("../../../assets/img/sliders/casa-slide-two.jpeg")
+            background-image: url("../../../assets/img/sliders/casa-slide-two.jpeg");
         }
 
         .slide3{
@@ -205,185 +142,330 @@ $colorGreen: #046904;
         }
 
 
-        .prev:hover, .next:hover{
-           
-            background-color: $colorBlack;
-        }
-
-        .next{
-            right: 0;
-        }
-
-        .dots{
-            text-align: center;
+        .arrows{
             position: absolute;
-            left: 50%;
-            transform: translate(-50%);
-            bottom: 70px;
-
-            .dot{
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                margin: 0 10px;
-                background-color: rgba(255, 255, 255, 0.253);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 12;
+            
+            button{
+                outline: none;
+                border: none;
+                height: 40px;
+                width: 40px;
                 border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
                 cursor: pointer;
 
+                color: white;
+                background-color: #02162f9c;
+
+                fa-icon{
+                    font-weight: 100;
+                }
             }
 
-            .active-dot, .dot:hover{
-                background-color: white;
-
-            } 
-
-            .fadeHeader{
-                -webkit-animation-name: fade;
-                -webkit-animation-duration: 1.5s;
-                animation-name: fade;
-                animation-duration: 1.5s;
-            }
-
-            @-webkit-keyframes fade {
-
-                from {
-                    opacity: 0.8;
-                }
-
-                to{
-                    opacity: 1;
-                }
+            button:hover{
+           
+                background-color: $colorRed;
                 
             }
 
-            @keyframes fade {
-
-                from {
-                    opacity: 0.8;
-                }
-
-                to{
-                    opacity: 1;
-                }
-                
+            .next{
+                right: 0;
             }
-        }   
+        }
+
+        
+
+
+        
+
+    
     }
 
 
     .about{
         display: flex;
         align-items: center;
-        justify-content: center;
         flex-direction: column;
-        padding: 80px 7%;
-
-        .about-title{
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-end;
-            margin: 0 0 60px 0;
-
-            & img{
-                height: 40px;
-                width: 60px;
-            }
-
-            & span{
-                font-size: 2.2em;
-                font-weight: bold;
-                margin: 0 10px;
-            }
-        }
+        padding: 120px 0 0 0;
 
         .about-content{
             display: flex;
             justify-content: space-between;
             width: 100%;
 
-            .about-content-text{
+            .texts-bloc{
 
-                width: 50%;
+                width: 55%;
+                //width:620px;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                text-align: justify;
 
                  h3{
                     font-size: 2em;
                     position: relative;
-                    margin: 0 0 20px 0;
+                    margin-bottom: 45px;
                 }
 
-                 h3::after{
+                 
+                h3::after{
                     content: "";
                     position: absolute;
                     height: 5px;
-                    width: 90px;
-                    background-color: rgb(4, 105, 4);
+                    width: 40px;
+                    background-color: $colorRed;
                     bottom: -5px;
                     left: 0;
                     border-radius: 100px;
                 }
 
-                span:nth-child(2){
-                    font-size: 1.8em;
-                    font-weight: bold;
-                    color: $colorGreen;
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                }
-
-                span:nth-child(3), span:nth-child(4), span:nth-child(5), span:nth-child(6){      
-                    font-size: 1.1em;            
-                }
-
-                span:nth-child(7){                    
-                    font-weight: bold;
-                    color: $colorGreen;
-                    font-weight: bold;
-                    margin-top: 10px;
+                p{
+                    line-height: 20px;
+                    margin-bottom: 0.6rem;
+                    font-size: 1.05em;
                 }
             }
 
-            .about-content-media{
+            .images-bloc{
 
-                position: relative;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 320px;
-                height: 380px;
+
+                .main-image{
+                    width: 220px;
+                    height: 300px;
+                    background-image: url("../../../assets/img/chief.jpeg");
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    margin: 0 10px 0 0;
+                    border-radius: 5px;
+                }
+
+                .other-images{
+                    display: flex;
+                    flex-direction: column;
+
+                    .other-image-one{
+                        width: 150px;
+                        height: 200px;
+                        margin: 0 0 5px 0;
+                        background-image: url("../../../assets/img/sliders/casa-slide-one.jpeg");
+                        background-position: center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        border-radius: 5px;
+                    }
+
+                    .other-image-two{
+                        width: 150px;
+                        height: 200px;
+                        margin: 5px 0 0px 0;
+                        background-image: url("../../../assets/img/about-two.webp");
+                        background-position: center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        border-radius: 5px;
+                    }
+                }
+                
+            }
+        }
+
+        .recommandations-content{
+            display: flex;
+            width: 100%;
+            padding-top: 100px;
+            text-align: center;
+            padding-bottom: 0;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            img{
+                    
+                width: 315px;
+                height: 450px;
+
+            }
+
+            .recommandations{
+
+                display: flex;
                 flex-direction: column;
+                align-items: center;
 
-                & img{
-                    z-index: 2;
-                    height: 340px;
-
+                h3{
+                    font-size: 2em;
+                    position: relative;
+                    margin-bottom: 70px;
+                    width: fit-content;
                 }
-
-                & span:nth-child(2){
-                    width: 280px;
-                    height: 280px;
-                    background-color: rgba(6, 43, 6, 0.774);
+    
+                h3::after{
+                    content: "";
                     position: absolute;
-                    border-radius: 50%;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                    height: 5px;
+                    width: 40px;
+                    background-color: $colorRed;
+                    bottom: -5px;
+                    border-radius: 100px;
+                    left: 0;
                 }
 
-                & span:nth-child(3){
-                    color: rgba(6, 43, 6, 0.774);
-                    font-size: 1.4em;
-                    font-weight: 550;
-                    margin-top: 10px;
-                    text-align: center;
+                .plats{
+                    display: flex;
+                    margin-top: 55px;
+                    flex-wrap: wrap;
+
+                    .plat{
+                        width: 270px;
+                        height:fit-content;
+                        margin-left: 30px;
+                        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;                        
+                        transition: all .2s ease-in-out;
+                        border-radius: 5px;
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        padding: 70px 20px 20px 20px;
+                        color: #00031f;
+                        cursor: pointer;
+
+                        .image-plat{
+                            position: absolute;
+                            top: -70px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 130px;
+                            height: 130px;
+                            border-radius: 50%;
+                            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+                        }
+
+                        .titre-plat{
+                            color: $colorRed;
+                            margin-bottom: 10px;
+                            font-size: 1.1em;
+
+                        }
+
+                        .description-plat{
+                            margin-bottom: 10px;
+                            width: 100%;
+                            text-align: justify;
+                            line-height: 20px;
+                            font-size: 0.95em;
+                            font-weight: 400;
+                        }
+
+                        .prix-voir{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-top: 10px;
+
+
+                            .prix-plat{
+                                color: #00031f;
+                                font-weight: 500;
+                                font-size: 1.2em;
+                            }
+    
+                            .voir-plat{
+
+                                border:none;
+                                outline:none;
+                                background-color: #00031f;
+                                border-radius: 100px;
+                                width: fit-content;
+                                color: white;
+                                padding: 2px 10px;
+                                font-size: 0.9em;
+                                border: 2px solid #00031f;
+                                transition: all 0.2s ease-in-out;
+                            }
+
+                            .voir-plat:hover{
+                                background-color: white;
+                                color: #00031f;
+                            }
+
+                        }
+
+                        
+                    }
+
+                    .plat:hover{
+                        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+                    }
                 }
             }
         }
+
+        .horaires-content{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-image: url("../../../assets/img/casa-slide-three.jpeg");
+
+                /* Set a specific height */
+                height: 300px;
+                width: 100%;
+              
+                /* Create the parallax scrolling effect */
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+                color: white;
+
+            .header-bloc{
+                
+
+                h3{
+                    font-size: 2em;
+                    position: relative;
+                    width: fit-content;
+                }
+    
+                h3::after{
+                    content: "";
+                    position: absolute;
+                    height: 5px;
+                    width: 40px;
+                    background-color: $colorRed;
+                    bottom: -5px;
+                    border-radius: 100px;
+                    left: 0;
+                }
+            }
+        }
+
+        .horaires-content:after{
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+        }
     }
 
-    .a-emporter{
+
+    .commandez{
         position: relative;
         width: 100%;
         padding: 90px 0;
@@ -458,7 +540,7 @@ $colorGreen: #046904;
         }
         
     }
-    .a-emporter::after{
+    .commandez::after{
         content: "";
         top: 0;
         left:0;
@@ -1467,7 +1549,7 @@ $colorGreen: #046904;
 @media all and (max-width: 820px){
 
 
-    .about, .a-emporter, .carte, .testinony-bloc, .contact-bloc{
+    .about, .commandez, .carte, .testinony-bloc, .contact-bloc{
 
         .about-title, .commandez-title, .carte-title, .testimony-title, .contact-header{
 
@@ -1670,7 +1752,7 @@ $colorGreen: #046904;
 //À emporter header responsive
 @media all and (max-width: 470px){
 
-    .a-emporter{
+    .commandez{
 
         .commandez-title{
             & span{
@@ -1694,7 +1776,7 @@ $colorGreen: #046904;
 @media all and (max-width: 450px){
 
 
-    .a-emporter{
+    .commandez{
         padding: 50px 0.5em !important;
 
 

@@ -1,6 +1,11 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, filter, first, map } from 'rxjs/operators';
+
+import { SwiperComponent } from 'swiper/angular';
+import SwiperCore, { EffectFade, Pagination, Navigation  } from "swiper";
+
+SwiperCore.use([EffectFade, Pagination, Navigation])
 
 //importing aos an animation library
 declare var AOS: any;
@@ -26,9 +31,12 @@ declare var google: { maps: { Animation: { DROP: any; }; }; };
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap | undefined;
   @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
@@ -43,8 +51,12 @@ export class HomeComponent implements OnInit {
   faInfoCircle = faInfoCircle;
 
     //variables for home header slide
+    
     counter:number = 1;
     timer: any;
+
+    //Variable telling if first time slide
+    isFirstTimeSlide: boolean = true;
 
     poissonsArray: Produit[] = [];
     dessertsArray: Produit[] = [];
@@ -107,88 +119,18 @@ export class HomeComponent implements OnInit {
 
     AOS.init();
 
-    this.slideFunction(this.counter);
     this.getPoissonsArray();
     this.getDessertArray();
     this.getTestimonies();
 
-    //Hangling swipe event
-  (<HTMLElement>document.querySelector('.slider')).addEventListener('touchstart',  (event) => {
-    this.touchstartX = event.changedTouches[0].screenX;
-    this.touchstartY = event.changedTouches[0].screenY;
-  }, false);
-
-  (<HTMLElement>document.querySelector('.slider')).addEventListener('touchend',  (event) => {
-
-    
-
-    this.touchendX = event.changedTouches[0].screenX;
-    this.touchendY = event.changedTouches[0].screenY;
-    this.handleGesture();
-}, false);
-
-
   }
 
-  @HostListener('window:scroll', ['$event'])
 
-//Changing backgroung on scroll of header menu 
-//changing the rigth active link when scolling
-
-  onWindowScroll( ) {
-      let header = <HTMLElement>document.querySelector('header');
-      let accueil = <HTMLElement>document.querySelector('#accueil');
-      let about = <HTMLElement>document.querySelector('.about');
-      let commandez = <HTMLElement>document.querySelector('.a-emporter');
-      let carte = <HTMLElement>document.querySelector('.carte');
-      let temoignages = <HTMLElement>document.querySelector('.testinony-bloc');
-      let contact = <HTMLElement>document.querySelector('.contact-bloc');
-
-
-      //Setting the background color of the header to black after scroll
-      if (window.pageYOffset > header.clientHeight) {
-        header.classList.add('navbar-background-on-scroll');
-      } else {
-        header.classList.remove('navbar-background-on-scroll');
-      }
-
-
-      //changinthe color of link
-      if(window.pageYOffset < accueil.offsetHeight -30){
-
-        this.setActiveLink(1);
-      }
-      
-      if ((window.pageYOffset < commandez.offsetTop) && window.pageYOffset > about.offsetTop - header.clientHeight) {
-        
-        this.setActiveLink(2);
-      }
-
-      if ((window.pageYOffset < carte.offsetTop) && window.pageYOffset > commandez.offsetTop - header.clientHeight) {
-        
-        this.setActiveLink(3);
-      }
-
-      if ((window.pageYOffset < temoignages.offsetTop) && window.pageYOffset > carte.offsetTop - header.clientHeight) {
-        
-        this.setActiveLink(4);
-      }
-
-      if ((window.pageYOffset < contact.offsetTop) && window.pageYOffset > temoignages.offsetTop - header.clientHeight) {
-        
-        this.setActiveLink(5);
-      }
-
-      if (window.pageYOffset > contact.offsetTop - header.clientHeight) {
-        
-        this.setActiveLink(6);
-      }
-  }
 
 //Setting the active link
   setActiveLink(linkNumber: number){
 
-    var myLinks = <NodeListOf<HTMLElement>>document.querySelectorAll("li span");
+    var myLinks = <NodeListOf<HTMLElement>>document.querySelectorAll("li a");
     var navSmallScreen = <HTMLElement>document.querySelector('.header-right');
     var inputstatus = <HTMLInputElement>document.querySelector('.burger input');
     
@@ -238,7 +180,7 @@ export class HomeComponent implements OnInit {
         this.currentAnchorTag = "carte"
       }
   
-      else if(nav == "/#temoignages"){
+      else if(nav == "/#témoignages"){
         this.currentLinkNumber = 5;
         this.currentAnchorTag = "temoignages"
       }
@@ -285,80 +227,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
+ 
 
-  //Function handling the slider
-  slideFunction(slideNumber: number): void{
-    var mySlides = <NodeListOf<HTMLElement>>document.querySelectorAll(".mySlide");
-    var myDots = <NodeListOf<HTMLElement>>document.querySelectorAll(".dot");
+  arrowSlide(param: number){
 
-    mySlides.forEach(element => {
-
-      element.style.display = "none";
-      
-    });
-
-    myDots.forEach(element =>{
-      element.classList.remove("active-dot");
-    })
-
-    if(slideNumber > mySlides.length){
-      this.counter = 1;
+    if(param > 0){
+      this.swiper?.swiperRef.slideNext(700);
+      console.log('inside');
     }
-
-    if(slideNumber < 1){
-      this.counter = mySlides.length;
+    else{
+      this.swiper?.swiperRef.slidePrev(700);
     }
-
-    mySlides[this.counter - 1].style.display ="block";
-
-    myDots[this.counter - 1].classList.add("active-dot");
-
-
-    //after sliding we reset the timer
-    this.resetTimer();
   }
-
-  //chage slide to the next slide after 8 secondes 
-  autoSlide() {
-    this.counter += 1;
-    this.slideFunction(this.counter);
-  }
-
-   //Show the next or prev slide when click on plus or minus sign arrows
-   clickOnArrow(num: number): any{
-    this.counter += num;
-    this.slideFunction(this.counter);
-    this.resetTimer();
-  }
-
-  //Show corresponding clicked dot 
-  currentSlide(slideNumber: number):any{
-    this.counter = slideNumber;
-
-    this.slideFunction(this.counter);
-    this.resetTimer();
-
-  }
-
-  //reset the timer to 0 and relaunch the autoSlide funtion
-  resetTimer():void{
-    clearInterval(this.timer);
-    this.timer = setInterval(()=>{this.autoSlide()},8000);
-  }
-
-
-   handleGesture() {
-    if (this.touchendX < this.touchstartX) {
-        this.clickOnArrow(-1);
-    }
-
-    if (this.touchendX > this.touchstartX) {
-        this.clickOnArrow(+1);
-
-    }
-}
-
-
 
 
 //Handling click on tabs menu
@@ -427,8 +307,6 @@ export class HomeComponent implements OnInit {
   openMapInfo(marker: MapMarker) {
      this.info.open(marker);
   }
-
-
 
 }
 

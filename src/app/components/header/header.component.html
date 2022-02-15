@@ -1,0 +1,49 @@
+<header (scroll)="onWindowScroll()">
+
+    <div class="content my-container">
+
+        <img (click)="setActiveLinkAndNavigate(1,'hero')" class="logo" src="../../../assets/img/casabreizh_logo.png" alt="Logo du restaurant Casabreizh">
+
+        <div class="header-right">
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#accueil" (click)="setActiveLink(1)">Accueil</a>
+                    </li>
+
+                    <li>
+                        <a href="#a-propos" (click)="setActiveLink(2)">A Propos</a>
+                    </li>
+
+                    <li>
+                        <a href="#commandez" (click)="setActiveLink(3)">Commandez</a>
+                    </li> 
+
+                    <li>
+                        <a href="#carte" (click)="setActiveLink(4)">La Carte</a>
+                    </li>
+
+                    <li>
+                        <a href="#témoignages" (click)="setActiveLink(5)">Témoignages</a>
+                    </li>
+
+                    <li>
+                        <a href="#contact" (click)="setActiveLink(6)">Contact</a>
+                    </li>
+                </ul>
+
+
+            </nav>
+
+            <div class="burger" (click)="onBurgerMenu()">
+                <input type="checkbox" />
+            
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+    </div>
+</header>

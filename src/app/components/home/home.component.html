@@ -1,125 +1,172 @@
-<div class="home" (scroll)="onWindowScroll()">
 
-    <header>
+<div class="home">
 
-        
-            <img (click)="setActiveLinkAndNavigate(1,'accueil')" class="logo" src="../../../assets/img/casabreizh_logo.png" alt="Logo du restaurant Casabreizh">
+
+    <section class="accueil slider" id="accueil">
+
+        <swiper
+            [loop]="true"
+            [effect]="'fade'"
+            [navigation]="true"
+            [pagination]="{
+                clickable: true
+            }"
+
+            class="mySwiper"
+
+            #swiper
+        >
+
+            <ng-template swiperSlide>
+                <div class="mySlide slide1">
+                    <div class="slider-text">
+                        <h1>
+                            Bienvenue chez 
+                            <span>CASABREIZH</span>
+                        </h1>
+                        <p>Venez découvrir des plats typiques du Sénégal comme :</p>
+                        <ul>
+                            <li>le Mafé (boeuf sauce arachide)</li>
+                            <li>le Soupoukandja (boeuf sauce gombo)</li>
+                            <li>le Baracouda grillé ou poisson Capitaine</li>
+                            <li>le Tiéboudjène, riz au poisson  (plat national du Sénégal)</li>
+                        </ul>
+                        
+                        <a href="#carte" (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</a>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template swiperSlide>
+                <div class="mySlide slide2">
+                    <div class="slider-text">
+                        <h1>Un Accueil Chaleureux</h1>
+                        <p>Le Casa Breizh vous réserve un accueil des plus convivial dans un cadre agréable et dépaysant. Du mardi au samedi, le matin comme le soir</p>
+                        <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
+                     </div>
+                </div>
+            </ng-template>
+
+            <ng-template swiperSlide>
+                <div class="mySlide slide3">
+                    <div class="slider-text">
+                        <h1>Une Cuisine Originale</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
+                    </div>
+                </div>
+            </ng-template>
+            
+        </swiper>
+
     
-            <nav class="header-right">
-                <ul>
-                    <li><span (click)="setActiveLinkAndNavigate(1,'accueil')">Accueil</span></li>
-                    <li><span (click)="setActiveLinkAndNavigate(2, 'a-propos')">À Propos</span></li>
-                    <li><span (click)="setActiveLinkAndNavigate(3, 'commandez')">Commandez</span></li>
-                    <li><span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span></li>
-                    <li><span (click)="setActiveLinkAndNavigate(5, 'temoignages')">Témoignages</span></li>
-                    <li><span (click)="setActiveLinkAndNavigate(6, 'contact')">Contact</span></li>
-                </ul>
-            </nav>
-
-        <div class="burger" (click)="onBurgerMenu()">
-            <input type="checkbox" />
-        
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    
-    </header>
-
-    <div class="slider" id="accueil">
-
-        <div class="mySlide fadeHeader slide1">
-            <div class="slider-text">
-                <h1>Des Plats Exotiques</h1>
-                <p>Venez découvrir des plats typiques du Sénégal comme :</p>
-                <ul>
-                    <li>le Mafé (boeuf sauce arachide)</li>
-                    <li>le Soupoukandja (boeuf sauce gombo)</li>
-                    <li>le poisson Capitaine ou Baracouda grillé</li>
-                    <li>le Tiéboudjène, riz au poisson  plat national du Sénégal</li>
-                </ul>
-                
-                <span  (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
-            </div>
+        <div class="arrows my-container">
+            <button class="prev" (click)="arrowSlide(-1)"><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+            <button class="next" (click)="arrowSlide(1)"><fa-icon [icon]="faChevronRight"></fa-icon></button>
         </div>
 
-        <div class="mySlide fadeHeader slide2">
-            <div class="slider-text">
-                <h1>Un Accueil Chaleureux</h1>
-                <p>Le Casa Breizh vous réserve un accueil des plus convivial dans un cadre agréable et dépaysant. Du mardi au samedi, le matin comme le soir</p>
-                <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
-             </div>
-        </div>
-
-        <div class="mySlide fadeHeader slide3">
-            <div class="slider-text">
-                <h1>Une Cuisine Originale</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
-            </div>
-        </div>
+    </section>
 
 
-        <span class="prev" (click)="clickOnArrow(-1)"><fa-icon [icon]="faChevronLeft"></fa-icon></span>
-        <span class="next" (click)="clickOnArrow(1)"><fa-icon [icon]="faChevronRight"></fa-icon></span>
+    <section id="a-propos" class="about">
 
-        <div class="dots">
-            <span class="dot" (click)="currentSlide(1)"></span>
-            <span class="dot" (click)="currentSlide(2)"></span>
-            <span class="dot" (click)="currentSlide(3)"></span>
-        </div>
-    </div>
-
-    <div id="a-propos" class="about">
-
-        <div class="about-title">
-            <img src="../../../assets/img/deco/left-green.png" alt="Décoration de titre gauche">
-            <span>A PROPOS</span>
-            <img src="../../../assets/img/deco/right-green.png" alt="Décoration de titre droit">
-        </div>
-
-        <div class="about-content">
-
-            <div class="about-content-text">
+        <div class="about-content my-container">
+            <div class="texts-bloc">
                 <h3>Notre Histoire</h3>
-                <span>Cuisine d'ici et d'ailleurs</span>
-                <span>
-                    <strong>Casa</strong>, c’est un clein d’oeil de ma région d’origine : la
+                <p>
+                    <b>Casa</b>, c’est un clein d’oeil de ma région d’origine : la
                     Casamance au Sénégal.
-                </span>
-                <span>
-                    <strong>Breizh</strong> se rapporte à la cuisine
+                </p>
+                <p>
+                    <b>Breizh</b> se rapporte à la cuisine
                     d’ici, en Bretagne.
-                </span>
-                <span>
+                </p>
+                <p>
                     Dans une ambiance chaleureuse et conviviale, je vous 
                     emmènerai pour un voyage cullinaire en vous faisant 
                     découvrir ma cuisine africaine avec des plats parfumés
                     et relevés. Si vous préferez rester sur des saveurs familières, je vous
                     proposerais un large choix de plats traditionnels : magret 
                     de canard, entrecôte, grande salade, tartine …
-                </span>
-                <span>
+                </p>
+                <p>
                     Un week-end par mois le chef organise des voyages 
                     culinaires vers d’autres horizons.
-                </span>
-                <span>
+                </p>
+                <p>
                     Dépaysement garanti !!!
-                </span>
-                
+                </p>
+
+                <p>Casabreizh, Cuisine d'ici et d'ailleurs</p>
+
             </div>
            
-            <div class="about-content-media">
-                <img src="../../../assets/img/casa-about.png" alt="image du chef Atho" data-aos="fade-up">
-                <span data-aos="fade-down"></span>
-                <span> Chef ATHO</span>
+            <div class="images-bloc">
+
+                <div class="main-image">
+
+                </div>
+
+                <div class="other-images">
+                    <div class="other-image-one"></div>
+                    <div class="other-image-two"></div>
+                </div>
+
             </div>
         </div>
 
-    </div>
+        <div class="recommandations-content  my-container">
 
-    <div id="commandez" class="a-emporter">
+            <img src="../../../assets/img/chef-atho.png" alt="">
+
+            <div class="recommandations">
+                <h3>Recommandations du chef</h3>
+
+                <div class="plats">
+
+                    <div class="plat">
+                        <img class="image-plat" src="../../../assets/img/tieb.png">
+                        <span class="titre-plat">Tieboudjène</span>
+                        <p class="description-plat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus</p>
+
+                        <div class="prix-voir">
+                            <span class="prix-plat">16€</span>
+                            <button class="voir-plat">Voir plus</button>
+                        </div>
+                        
+                    </div>
+
+                    <div class="plat">
+                        <img class="image-plat" src="../../../assets/img/magret.png">
+                        <span class="titre-plat">Tieboudjène</span>
+                        <p class="description-plat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus</p>
+
+                        <div class="prix-voir">
+                            <span class="prix-plat">19€</span>
+                            <button class="voir-plat">Voir plus</button>
+                        </div>
+                        
+                    </div>
+
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <div class="horaires-content my-container">
+
+            <div class="header-bloc">
+                
+                <h3>Nos horaires</h3>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="commandez" class="commandez">
     
         <div class="commandez-title">
             <img src="../../../assets/img/deco/left-gold.png" alt="Décoration de titre gauche">
@@ -137,9 +184,10 @@
               
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="carte" class="carte">
+
+    <section id="carte" class="carte">
 
         <div class="carte-title">
             <img src="../../../assets/img/deco/left-red.png" alt="Décoration de titre gauche">
@@ -285,143 +333,120 @@
             </div>
 
         </div>
-    </div>
+    </section>
 
 
-
-<!-- témoignages bloc start -->
-
-<div id="temoignages" class="testinony-bloc">
+    <section id="témoignages" class="testinony-bloc">
 
 
-    <div class="testimony-title">
-        <img src="../../../assets/img/deco/left-white.png" alt="Décoration de titre gauche">
-        <span>TEMOIGNAGES</span>
-        <img src="../../../assets/img/deco/right-white.png" alt="Décoration de titre droit">
-    </div>
-
-
-    
-
-    <div class="testimony-caroussel">
-
-        <div class="testimony-caroussel-hidder">
-
-            <div class="testimony-caroussel-container">
-
-                <div class="testimony-element" data-aos="fade-up" data-aos-duration="1000" *ngFor="let testimony of testimoniesArray" >
-            
-                    <span class="testimony-element-title"> {{testimony.nom}} </span>
-
-                    <div class="testimony-element-message">
-                                
-                        <span class="testimony-element-text-first-child"> {{testimony.message}} </span>
-                        
-                    </div>
-                    <span>étoiles</span>
-                </div>
-            </div>
-
-            <span class="testimony-prev" (click)="testimonyClickPrev()">&#10094;</span>
-            <span class="testimony-next" (click)="testimonyClickNext()">&#10095;</span>
-
+        <div class="testimony-title">
+            <img src="../../../assets/img/deco/left-white.png" alt="Décoration de titre gauche">
+            <span>TEMOIGNAGES</span>
+            <img src="../../../assets/img/deco/right-white.png" alt="Décoration de titre droit">
         </div>
-    </div>
+
+
         
-    <span class="testimony-call-to-action" data-aos="fade-up"  >Laissez nous un commentaire</span>
 
-</div>
+        <div class="testimony-caroussel">
 
-<!-- témoignages bloc end -->
+            <div class="testimony-caroussel-hidder">
 
+                <div class="testimony-caroussel-container">
 
-<!-- contact bloc start -->
+                    <div class="testimony-element" data-aos="fade-up" data-aos-duration="1000" *ngFor="let testimony of testimoniesArray" >
+                
+                        <span class="testimony-element-title"> {{testimony.nom}} </span>
 
-<div id="contact" class="contact-bloc">
+                        <div class="testimony-element-message">
+                                    
+                            <span class="testimony-element-text-first-child"> {{testimony.message}} </span>
+                            
+                        </div>
+                        <span>étoiles</span>
+                    </div>
+                </div>
 
-    <div class="contact-header">
-        <img src="../../../assets/img/deco/left-gold.png" alt="Décoration de titre gauche">
-        <span>CONTACTEZ-NOUS</span>
-        <img src="../../../assets/img/deco/right-gold.png" alt="Décoration de titre droit">
-    </div>
+                <span class="testimony-prev" (click)="testimonyClickPrev()">&#10094;</span>
+                <span class="testimony-next" (click)="testimonyClickNext()">&#10095;</span>
 
-    <div class="contact-bloc-info-form">
-        <div class="contact-info" data-aos="fade-up" data-aos-duration="1000">
-            <div class="emplacement">
-                <span><fa-icon [icon]="faMapMarkerAlt"></fa-icon></span>
-                <span >Emplacement</span>
-                <span>165 rue de Fougère</span>
-                <span>35700, Rennes</span>
-            </div>
-
-            <div class="horaire">
-                <span><fa-icon [icon]="faCalendarAlt"></fa-icon></span>
-                <span >Nos Horaires</span>
-                <span>Mardi à Samedi</span>
-                <span>12h00-15h00 et 19h30-22h30</span>
-            </div>
-
-            <div class="phone-mail">
-                <span><fa-icon [icon]="faPhone"></fa-icon> / <fa-icon [icon]="faEnvelope"></fa-icon></span>
-                <span >Nous Contacter</span>
-                <span>(+33) 02 99 38 45 08 </span>
-                <span>contact@casabreizh.fr</span>
             </div>
         </div>
-        <form data-aos="fade-down" data-aos-duration="1000">
-            <div class="name-email">
-                <div class="name-bloc">
-                    <input id="name-input" type="text" placeholder="Nom">
-                    <label class="label-id"for="name">Nom</label>
+            
+        <span class="testimony-call-to-action" data-aos="fade-up"  >Laissez nous un commentaire</span>
+
+    </section>
+
+
+    <section id="contact" class="contact-bloc">
+
+        <div class="contact-header">
+            <img src="../../../assets/img/deco/left-gold.png" alt="Décoration de titre gauche">
+            <span>CONTACTEZ-NOUS</span>
+            <img src="../../../assets/img/deco/right-gold.png" alt="Décoration de titre droit">
+        </div>
+
+        <div class="contact-bloc-info-form">
+            <div class="contact-info" data-aos="fade-up" data-aos-duration="1000">
+                <div class="emplacement">
+                    <span><fa-icon [icon]="faMapMarkerAlt"></fa-icon></span>
+                    <span >Emplacement</span>
+                    <span>165 rue de Fougère</span>
+                    <span>35700, Rennes</span>
                 </div>
-                <div class="email-bloc">
-                    <input id="email-input" type="text" placeholder="Email">
-                    <label class="label-id" for="email">Email</label>
+
+                <div class="horaire">
+                    <span><fa-icon [icon]="faCalendarAlt"></fa-icon></span>
+                    <span >Nos Horaires</span>
+                    <span>Mardi à Samedi</span>
+                    <span>12h00-15h00 et 19h30-22h30</span>
+                </div>
+
+                <div class="phone-mail">
+                    <span><fa-icon [icon]="faPhone"></fa-icon> / <fa-icon [icon]="faEnvelope"></fa-icon></span>
+                    <span >Nous Contacter</span>
+                    <span>(+33) 02 99 38 45 08 </span>
+                    <span>contact@casabreizh.fr</span>
                 </div>
             </div>
+            <form data-aos="fade-down" data-aos-duration="1000">
+                <div class="name-email">
+                    <div class="name-bloc">
+                        <input id="name-input" type="text" placeholder="Nom">
+                        <label class="label-id"for="name">Nom</label>
+                    </div>
+                    <div class="email-bloc">
+                        <input id="email-input" type="text" placeholder="Email">
+                        <label class="label-id" for="email">Email</label>
+                    </div>
+                </div>
 
-            <div class="objet-bloc">
-                <input id="objet-input" type="text" placeholder="Objet">
-                <label class="label-id" for="objet-input">Objet</label>
-            </div>
+                <div class="objet-bloc">
+                    <input id="objet-input" type="text" placeholder="Objet">
+                    <label class="label-id" for="objet-input">Objet</label>
+                </div>
 
-            <div class="message-bloc">
-                <textarea id="message-area" type="text" placeholder="Message"></textarea>
-                <label class="label-id" for="message-area">Message</label>
-            </div>
+                <div class="message-bloc">
+                    <textarea id="message-area" type="text" placeholder="Message"></textarea>
+                    <label class="label-id" for="message-area">Message</label>
+                </div>
 
-            <button >Envoyer <fa-icon [icon]="faPaperPlane"></fa-icon></button>
-        </form>
+                <button >Envoyer <fa-icon [icon]="faPaperPlane"></fa-icon></button>
+            </form>
+        </div>
+    </section>
+
+
+    <div *ngIf="apiLoaded | async">
+        <google-map height="500px" width="100%" [options]="options">
+            <map-marker #markerElem = "mapMarker"
+                [position]="marker.position" (mapClick)="openMapInfo(markerElem)">
+            </map-marker>
+
+            <map-info-window >
+                <div [innerHTML]="marker.info"></div>
+            </map-info-window>
+        </google-map>
     </div>
-</div>
-
-
-<!-- contact bloc end -->
-
-<!-- google map bloc start -->
-
-<div *ngIf="apiLoaded | async">
-    <google-map height="500px" width="100%" [options]="options">
-        <map-marker #markerElem = "mapMarker"
-            [position]="marker.position" (mapClick)="openMapInfo(markerElem)">
-        </map-marker>
-
-        <map-info-window >
-            <div [innerHTML]="marker.info"></div>
-        </map-info-window>
-    </google-map>
-</div>
-
-<!-- google map bloc end -->
-
-<!-- footer bloc start -->
-
-<div class="footer">
-    <span><span>Casabreizh</span>, Cuisine d'ici et d'ailleurs © 2021 </span>
-    <span>Site web développé par <span>Samuel M</span></span>
-</div>
-
-
-<!-- footer bloc end -->
 
 </div>
