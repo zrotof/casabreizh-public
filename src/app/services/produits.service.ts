@@ -8,35 +8,46 @@ import { Temoignage } from '../models/temoignage';
 })
 export class ProduitsService {
 
-  //Array of fishes
-  poissons: Produit[] | undefined;
-
-  //Array of meet
-  viandes: Produit[] | undefined;
-
-  //Array of drinks with alcohol
-  boissonsAlcolisees: Produit[] | undefined;
-
-  //Array of drinks without alcohol
-  boissonsNonAlcolisees: Produit[] | undefined;
-
-  //Array of deserts
-  desserts: Produit[] | undefined;
-
-  //Array of testimonies
-  testimonies: Temoignage[] = [];
-
   constructor() { }
 
 
-  //return array of food with fish
+  //return list of recommended product
+  getRecommendedProducts(){
+
+    return [
+      {
+        "nomProduit": "Tièboudjène",
+        "imageProduit": "../../../assets/img/tieb.png",
+        "prixProduit": "18,00 €",
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+        "etatProduit": true,
+        "categProduit": "poisson",
+        "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes","huile végétale","crevettes"]
+      },
+      {
+        "nomProduit": "Magret de cannard",
+        "imageProduit": "../../../assets/img/magret.png",
+        "prixProduit": "16,00 €",
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+        "etatProduit": true,
+        "categProduit": "poisson",
+        "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes"]
+        
+      }
+    ];
+
+  }
+
+
+  //return list of fish product
   getPlatsPoissons(){
-    return this.poissons =[
+
+    return [
        {
          "nomProduit": "Bar grillé sauce Yassa",
          "imageProduit": "../../../assets/img/poissons/casa-poisson-bar-yassa.jpeg",
          "prixProduit": "18,00 €",
-         "descriptionProduit": "tilapia mariné au citron vert tilapia mariné au citron vert, tilapia mariné au citron vert, ail, moutarde et oignons",
+         "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
          "etatProduit": true,
          "categProduit": "poisson",
          "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes","huile végétale","crevettes"]
@@ -45,8 +56,8 @@ export class ProduitsService {
          "nomProduit": "Mafé au poisson",
          "imageProduit": "../../../assets/img/poissons/casa-poisson-mafe.jpeg",
          "prixProduit": "16,00 €",
-         "descriptionProduit": "Tilapia sauce d'arachide",
-         "etatProduit": true,
+         "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+                  "etatProduit": true,
          "categProduit": "poisson",
          "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes"]
          
@@ -55,8 +66,8 @@ export class ProduitsService {
         "nomProduit": "Bar grillé sauce Yassa",
         "imageProduit": "../../../assets/img/poissons/casa-poisson-bar-yassa.jpeg",
         "prixProduit": "18,00 €",
-        "descriptionProduit": "tilapia mariné au citron vert, ail, moutarde et oignons",
-        "etatProduit": false,
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+                "etatProduit": false,
         "categProduit": "poisson",
         "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes"]
       },
@@ -64,8 +75,8 @@ export class ProduitsService {
         "nomProduit": "Mafé au poisson",
         "imageProduit": "../../../assets/img/poissons/casa-poisson-mafe.jpeg",
         "prixProduit": "18,50 €",
-        "descriptionProduit": "Tilapia sauce d'arachide",
-        "etatProduit": false,
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+                "etatProduit": false,
         "categProduit": "poisson",
         "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes"]
       },
@@ -73,8 +84,8 @@ export class ProduitsService {
         "nomProduit": "Bar grillé sauce Yassa",
         "imageProduit": "../../../assets/img/poissons/casa-poisson-bar-yassa.jpeg",
         "prixProduit": "18,00 €",
-        "descriptionProduit": "tilapia mariné au citron vert, ail, moutarde et oignons",
-        "etatProduit": true,
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+                "etatProduit": true,
         "categProduit": "poisson",
         "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes"]
       },
@@ -82,41 +93,33 @@ export class ProduitsService {
         "nomProduit": "Mafé au poisson",
         "imageProduit": "../../../assets/img/poissons/casa-poisson-mafe.jpeg",
         "prixProduit": "16,00 €",
-        "descriptionProduit": "Tilapia sauce d'arachide",
-        "etatProduit": false,
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus",
+                "etatProduit": false,
         "categProduit": "poisson",
         "ingredientsProduit": ["bar","oigons","piment","arachide","ail","huile végétale","crevettes"]
       }
      ];
+
    }
 
 
-
-
-
-
-
-
-
-
-
-
-   //return array of deserts
+  //return array of deserts
   getDesserts(){
-   return this.desserts =[
+
+   return [
       {
         "nomProduit": "Crème brûlée à la vanille",
         "imageProduit": "../../../assets/img/desserts/casa-dessert-creme-brulee.jpeg",
         "prixProduit": "05,00 €",
-        "descriptionProduit": "qsdfghjk oiuytrez sdfg fghjkl ezrtyuijosdfg fghjkl ezrtyuijo",
-        "etatProduit": false,
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+                "etatProduit": false,
         "categProduit": "viande"
       },
       {
         "nomProduit": "Salade de fruits",
         "imageProduit": "../../../assets/img/desserts/casa-dessert-salade-de-fruits.jpeg",
         "prixProduit": "04,50 €",
-        "descriptionProduit": "",
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
         "etatProduit": false,
         "categProduit": "viande"
       },
@@ -124,7 +127,7 @@ export class ProduitsService {
         "nomProduit": "Riz au lait caramel",
         "imageProduit": "../../../assets/img/desserts/casa-dessert-riz-au-lait.jpg",
         "prixProduit": "04,50 €",
-        "descriptionProduit": "",
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
         "etatProduit": true,
         "categProduit": "viande"
       },
@@ -132,7 +135,7 @@ export class ProduitsService {
         "nomProduit": "Moelleux au chocolat caramel",
         "imageProduit": "../../../assets/img/desserts/casa-dessert-moelleux-chocolat-caramel.jpeg",
         "prixProduit": "05,20 €",
-        "descriptionProduit": "",
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
         "etatProduit": false,
         "categProduit": "viande"
       },
@@ -140,18 +143,19 @@ export class ProduitsService {
         "nomProduit": "Café gourmand",
         "imageProduit": "../../../assets/img/desserts/casa-dessert-cafe-gourmand.jpeg",
         "prixProduit": "05,00 €",
-        "descriptionProduit": "",
+        "descriptionProduit": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
         "etatProduit": true,
         "categProduit": "viande"
       }
     ];
-  }
 
+  }
 
 
   //return array of deserts
   getTestimonies(){
-    return this.testimonies =[
+
+    return [
        {
          "nom": "Albertine",
         "message": "Cuisine excellente. C'est toujours un régal à chaque fois" 
@@ -188,7 +192,8 @@ export class ProduitsService {
         "nom": "Niquaise",
         "message": "On a réservé pour l'anniversaire de ma fille et tout était super. Merci encore à Casabreizh"
        }
-     ];
+    ];
+
    }
 
 

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, filter, first, map } from 'rxjs/operators';
 
@@ -12,8 +12,7 @@ declare var AOS: any;
 
 
 //importing fontawesome icons
-import { faChevronLeft, faChevronRight, faMapMarkerAlt, faCalendarAlt, faPhone, faEnvelope, faPaperPlane, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-
+import { faChevronLeft, faChevronRight, faMapMarkerAlt, faCalendarAlt, faPhone, faEnvelope, faPaperPlane, faInfoCircle, faClock, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { ProduitsService } from '../../services/produits.service';
 import { Produit } from '../../models/produit';
 import { Temoignage } from '../../models/temoignage';
@@ -22,7 +21,6 @@ import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProduitComponent } from '../produit/produit.component';
 import { Router, NavigationEnd} from '@angular/router';
 import { Observable, of } from 'rxjs';
 
@@ -49,6 +47,8 @@ export class HomeComponent implements OnInit {
   faEnvelope = faEnvelope;
   faPaperPlane = faPaperPlane;
   faInfoCircle = faInfoCircle;
+  faClock = faClock;
+  faCheck = faCheck;
 
     //variables for home header slide
     
@@ -58,6 +58,7 @@ export class HomeComponent implements OnInit {
     //Variable telling if first time slide
     isFirstTimeSlide: boolean = true;
 
+    recommendedProducts: Produit[] = [];
     poissonsArray: Produit[] = [];
     dessertsArray: Produit[] = [];
     testimoniesArray: Temoignage[] = [];
@@ -90,17 +91,12 @@ export class HomeComponent implements OnInit {
    currentAnchorTag ="accueil";
 
 
-   touchstartX: number = 0;
-   touchstartY: number = 0;
-   touchendX: number = 0;
-   touchendY: number = 0;
-
-
 //variable that allow to know if the API of google is correctly load
    apiLoaded: Observable<boolean> ;
 
-  constructor( httpClient: HttpClient, private produitService: ProduitsService, 
-    private modalService: NgbModal, 
+  constructor( 
+    httpClient: HttpClient, 
+    private produitService: ProduitsService, 
     private router: Router,
      ) {
       this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=', 'callback')
@@ -119,12 +115,12 @@ export class HomeComponent implements OnInit {
 
     AOS.init();
 
+    this.getRecommendedProducts();
     this.getPoissonsArray();
     this.getDessertArray();
     this.getTestimonies();
 
   }
-
 
 
 //Setting the active link
@@ -259,6 +255,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+  //Gettingrecommended product
+  getRecommendedProducts(){
+    this.recommendedProducts = this.produitService.getRecommendedProducts();
+  }
 
   //Getting fishes arrays
   getPoissonsArray(){
@@ -271,15 +271,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  //Handling click on product
-  openProduit(typeProduit: string, index: number){
 
-      const produitRef = this.modalService.open(ProduitComponent);
-      
-      if(typeProduit == "poisson"){
-        produitRef.componentInstance.currentProduit = this.poissonsArray[index];
-      }
-  }
   
 
   // Handling testimony arrow click

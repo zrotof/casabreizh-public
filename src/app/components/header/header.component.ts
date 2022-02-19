@@ -192,8 +192,7 @@ export class HeaderComponent implements OnInit {
 
 
     if(this.isBurgerMenuClicked === true){
-     this.onBurgerMenu();
-
+      this.onBurgerMenu();
     }
 
 

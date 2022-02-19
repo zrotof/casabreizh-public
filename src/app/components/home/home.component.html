@@ -40,9 +40,11 @@
             <ng-template swiperSlide>
                 <div class="mySlide slide2">
                     <div class="slider-text">
-                        <h1>Un Accueil Chaleureux</h1>
+                        <h1>Un Accueil 
+                            <span>Chaleureux</span>
+                        </h1>
                         <p>Le Casa Breizh vous réserve un accueil des plus convivial dans un cadre agréable et dépaysant. Du mardi au samedi, le matin comme le soir</p>
-                        <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
+                        <a href="#carte" (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</a>
                      </div>
                 </div>
             </ng-template>
@@ -50,10 +52,12 @@
             <ng-template swiperSlide>
                 <div class="mySlide slide3">
                     <div class="slider-text">
-                        <h1>Une Cuisine Originale</h1>
+                        <h1>Une Cuisine 
+                            <span>Originale</span>
+                        </h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <span (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</span>
+                        <a href="#carte" (click)="setActiveLinkAndNavigate(4, 'carte')">La Carte</a>
                     </div>
                 </div>
             </ng-template>
@@ -125,30 +129,8 @@
 
                 <div class="plats">
 
-                    <div class="plat">
-                        <img class="image-plat" src="../../../assets/img/tieb.png">
-                        <span class="titre-plat">Tieboudjène</span>
-                        <p class="description-plat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus</p>
-
-                        <div class="prix-voir">
-                            <span class="prix-plat">16€</span>
-                            <button class="voir-plat">Voir plus</button>
-                        </div>
-                        
-                    </div>
-
-                    <div class="plat">
-                        <img class="image-plat" src="../../../assets/img/magret.png">
-                        <span class="titre-plat">Tieboudjène</span>
-                        <p class="description-plat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam atque doloribus</p>
-
-                        <div class="prix-voir">
-                            <span class="prix-plat">19€</span>
-                            <button class="voir-plat">Voir plus</button>
-                        </div>
-                        
-                    </div>
-
+                    <app-product  *ngFor="let product of recommendedProducts ;let index = index" [product] = "product"> 
+                    </app-product>
                     
                 </div>
 
@@ -157,9 +139,41 @@
 
         <div class="horaires-content my-container">
 
-            <div class="header-bloc">
+            <div class="horaires-bloc">
                 
-                <h3>Nos horaires</h3>
+                <div class="clock-bloc">
+                    <fa-icon [icon]="faClock"></fa-icon>
+                    <h3>Heures d'ouverture</h3>
+                </div>
+
+                <div class="horaires">
+                    <div class="horaire">
+                        <span class="horaire-text">De Mardi à Jeudi</span>
+                        <span class="horaire-value">12h00 - 15h00  |  19h30 - 22h30</span>
+                    </div>
+
+                    <div class="horaire">
+                        <span class="horaire-text">De Vendredi à Samedi</span>
+                        <span class="horaire-value">12h00 - 15h00  |  19h00 - 23h30</span>
+                    </div>
+
+                    <div class="ways-to-eat">
+                        <span class="way">
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                            Sur place
+                        </span>
+
+                        <span class="way">
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                            À emporter
+                        </span>
+
+                        <span class="way">
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                            En livraison
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -168,223 +182,205 @@
 
     <section id="commandez" class="commandez">
     
-        <div class="commandez-title">
-            <img src="../../../assets/img/deco/left-gold.png" alt="Décoration de titre gauche">
-            <span>COMMANDEZ MAINTENANT</span>
-            <img src="../../../assets/img/deco/right-gold.png" alt="Décoration de titre droit">
-        </div>
-        
-        <img class="livreur" src="../../../assets/img/casa-deliver-driver.png" alt="illustration d'un livreur de nourriture">
-        <span>Pour vos livraisons à domicile retrouvez-nous sur</span>
-        <div class="commandez-content">
-            <div class="commandez-content-apps">
+        <div class="commandez-content my-container">
+            <h3>Commandez maintenant</h3>
+            
+            <div class="image-actions">
+                
+                <div class="actions">
+                    <span>Pour vos livraisons à domicile retrouvez-nous sur</span>
+                    <div class="apps">
 
-                <img data-aos="fade-right" src="../../../assets/img/casa-uber-eat.png" alt="Retrouvez Casabreizh sur uber eat">
-                <img data-aos="fade-left" src="../../../assets/img/casa-just-eat.png" alt="Retrouvez Casabreizh sur just eat">
-              
+                        <div class="app">
+                            <img data-aos="fade-right" src="../../../assets/img/casa-uber-eat.png" alt="Retrouvez Casabreizh sur uber eat">
+                            <button>Commander</button>
+                        </div>
+
+                        <div class="app">
+                            <img data-aos="fade-left" src="../../../assets/img/casa-just-eat.png" alt="Retrouvez Casabreizh sur just eat">
+                            <button>Commander</button>
+                        </div>
+                        
+                    
+                    </div>
+                </div>
+
+                <img class="livreur" src="../../../assets/img/delivery-food.jpeg" alt="illustration d'un livreur de nourriture">
+
             </div>
+            
         </div>
+
     </section>
 
 
     <section id="carte" class="carte">
 
-        <div class="carte-title">
-            <img src="../../../assets/img/deco/left-red.png" alt="Décoration de titre gauche">
-            <span>LA CARTE</span>
-            <img src="../../../assets/img/deco/right-red.png" alt="Décoration de titre droit">
-        </div>
+        <div class="carte-content my-container">
 
-        <div class="carte-tabs">
+            <h3>La carte</h3>
 
-            <div class="tabs-menu">
-                <span (click)="chooseTab(1)" class="tab-menu active-tab-menu" data-aos="fade-right">Formules</span>
-                <span (click)="chooseTab(2)" class="tab-menu" data-aos="fade-right">Plats</span>
-                <span (click)="chooseTab(3)" class="tab-menu" data-aos="fade-left">Boissons</span>
-                <span (click)="chooseTab(4)" class="tab-menu" data-aos="fade-left">Desserts</span>
-            </div>
+            <div class="carte-tabs">
 
-            <div class="tabs-pages">
+                <div class="tabs-menu" data-aos="fade-right">
+                    <span (click)="chooseTab(1)" class="tab-menu" >
+                        Formules
+                        <span class="items-number">
+                            3
+                        </span>
+                    </span>
 
+                    <span (click)="chooseTab(2)" class="tab-menu active-tab-menu">
+                        Plats
+                        <span class="items-number">
+                            13
+                        </span>
+                    </span>
 
-<!-- formules bloc start -->
-
-                <div class="tabs-pages-conteneur">
-                    <div class="tab-page  active-tab-page">
-                        <img class="cart-image" src="../../../assets/img/casa-carte.png" alt="la carte du restaurant Casabreizh">
-                    </div>
-
-<!-- formules bloc end -->
-
-
-
-<!-- plats bloc start -->
-
-                    <div class="tab-page plat">
-                        <span class="title">Poissons</span>
-                        <div class="produit-bloc">
-                            <div class="produit" *ngFor="let poisson of poissonsArray; let index= index" (click)="openProduit('poisson' ,index)">
-                                <div class="produit-bloc-image-text">
-                                    <img class="produit-image" src="{{poisson.imageProduit}}">
-                                    <span class="produit-text" *ngIf="poisson.etatProduit == false">Épuisé</span>
-                                </div>
-                                <div class="produit-info">
-                                    <span class="produit-info-title">{{poisson.nomProduit}}</span>
-                                    <span class="produit-info-description">{{poisson.descriptionProduit}}</span>
-                                    
-                                    <span class="produit-info-price"><fa-icon [icon]="faInfoCircle"></fa-icon >{{poisson.prixProduit}}</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <span class="title">Viandes</span>
-                        <div class="produit-bloc">
-                            <div class="produit" *ngFor="let dessert of dessertsArray">
-                                <div class="produit-bloc-image-text">
-                                    <img class="produit-image" src="{{dessert.imageProduit}}">
-                                    <span class="produit-text" *ngIf="dessert.etatProduit == false">Épuisé</span>
-                                </div>                                <div class="produit-info">
-                                    <span class="produit-info-title">{{dessert.nomProduit}}</span>
-                                    <span class="produit-info-description">{{dessert.descriptionProduit}}</span>
-                                    <span class="produit-info-price"><fa-icon [icon]="faInfoCircle"></fa-icon> {{dessert.prixProduit}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-<!-- Plats bloc end -->
-
-
-
-<!-- Boissons bloc start -->
-
-                    <div class="tab-page plat">
-
-                        <span class="title">Boissons non alcolisées</span>
-                        <div class="produit-bloc">
-                            <div class="produit" *ngFor="let poisson of poissonsArray">
-                                <div class="produit-bloc-image-text">
-                                    <img class="produit-image" src="{{poisson.imageProduit}}">
-                                    <span class="produit-text" *ngIf="poisson.etatProduit == false">Épuisé</span>
-                                </div> 
-                                
-                                <div class="produit-info">
-                                    <span class="produit-info-title">{{poisson.nomProduit}}</span>
-                                    <span class="produit-info-description">{{poisson.descriptionProduit}}</span>
-                                    <span class="produit-info-price"> <fa-icon [icon]="faInfoCircle"></fa-icon> {{poisson.prixProduit}}</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <span class="title">Boissons alcolisées</span>
-                        <div class="produit-bloc">
-                            <div class="produit" *ngFor="let dessert of dessertsArray">
-                                    <div class="produit-bloc-image-text">
-                                        <img class="produit-image" src="{{dessert.imageProduit}}">
-                                        <span class="produit-text" *ngIf="dessert.etatProduit == false">Épuisé</span>
-                                    </div> 
-                                    
-                                    <div class="produit-info">
-                                        <span class="produit-info-title">{{dessert.nomProduit}}</span>
-                                        <span class="produit-info-description">{{dessert.descriptionProduit}}</span>
-                                        <span class="produit-info-price"> <fa-icon [icon]="faInfoCircle"></fa-icon> {{dessert.prixProduit}}</span>
-                                        
-                                    </div>
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-
-<!-- Boissons bloc end -->
-
-
-
-<!-- dessert bloc start -->
-
-                    <div class="tab-page dessert" >
-                        <div class="produit-bloc plat">
-                            <span class="title">Nos Desserts</span>
-                            <div class="produit" *ngFor="let dessert of dessertsArray">
-                                <div class="produit-bloc-image-text">
-                                    <img class="produit-image" src="{{dessert.imageProduit}}">
-                                    <span class="produit-text" *ngIf="dessert.etatProduit == false">Épuisé</span>
-                                </div> 
-                    
-                                <div class="produit-info">
-                                    <span class="produit-info-title">{{dessert.nomProduit}}</span>
-                                    <span class="produit-info-description">{{dessert.descriptionProduit}}</span>
-                                    <span class="produit-info-price"> <fa-icon [icon]="faInfoCircle"></fa-icon> {{dessert.prixProduit}}</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-<!-- dessert bloc end -->
-
-
+                    <span (click)="chooseTab(3)" class="tab-menu">
+                        Boissons
+                        <span class="items-number">
+                            10
+                        </span>
+                    </span>
+                    <span (click)="chooseTab(4)" class="tab-menu">
+                        Desserts
+                        <span class="items-number">
+                            4
+                        </span>
+                    </span>
                 </div>
-                
-            </div>
 
-        </div>
+                <div class="tabs-pages">
+
+                        <div class="carte tab-page">
+                            <img class="cart-image" src="../../../assets/img/casa-carte.png" alt="la carte du restaurant Casabreizh">
+                        </div>
+
+    <!-- formules bloc end -->
+
+
+
+    <!-- plats bloc start -->
+
+                        <div class="tab-page plat active-tab-page">
+                            <span class="title">Poissons</span>
+                            <div class="produit-bloc">
+                                <app-product *ngFor="let poisson of poissonsArray"  [product]="poisson"> 
+                                </app-product>
+                            </div>
+
+                            <span class="title">Viandes</span>
+                            <div class="produit-bloc">
+                                <app-product *ngFor="let poisson of poissonsArray"  [product]="poisson">            
+                                </app-product>
+                            </div>
+                        </div>
+
+    <!-- Plats bloc end -->
+
+
+
+    <!-- Boissons bloc start -->
+
+                        <div class="tab-page plat">
+
+                            <span class="title">Boissons non alcolisées</span>
+                            <div class="produit-bloc">
+                                <app-product  *ngFor="let poisson of poissonsArray" [product]="poisson">
+                                </app-product>
+                            </div>
+
+                            <span class="title">Boissons alcolisées</span>
+                            <div class="produit-bloc">
+                                <app-product *ngFor="let dessert of dessertsArray" [product]="dessert">
+                                </app-product>
+                            </div>
+
+
+
+
+                        </div>
+
+    <!-- Boissons bloc end -->
+
+
+
+    <!-- dessert bloc start -->
+
+                        <div class="tab-page dessert" >
+                            <div class="produit-bloc plat">
+                                <span class="title">Nos Desserts</span>
+                                <app-product  *ngFor="let dessert of dessertsArray" [product]="dessert">
+                                </app-product>
+                            </div>
+                        </div>
+
+    <!-- dessert bloc end -->
+
+
+                    </div>
+                    
+                </div>
+
+            </div>
+        
     </section>
 
 
     <section id="témoignages" class="testinony-bloc">
 
-
-        <div class="testimony-title">
-            <img src="../../../assets/img/deco/left-white.png" alt="Décoration de titre gauche">
-            <span>TEMOIGNAGES</span>
-            <img src="../../../assets/img/deco/right-white.png" alt="Décoration de titre droit">
-        </div>
+        <div class="testimony-content my-container">
+            <h3>
+                Témoignages
+            </h3>
 
 
-        
-
-        <div class="testimony-caroussel">
-
-            <div class="testimony-caroussel-hidder">
-
-                <div class="testimony-caroussel-container">
-
-                    <div class="testimony-element" data-aos="fade-up" data-aos-duration="1000" *ngFor="let testimony of testimoniesArray" >
-                
-                        <span class="testimony-element-title"> {{testimony.nom}} </span>
-
-                        <div class="testimony-element-message">
-                                    
-                            <span class="testimony-element-text-first-child"> {{testimony.message}} </span>
-                            
-                        </div>
-                        <span>étoiles</span>
-                    </div>
+            <div class="testimony-intro">
+                <img src="../../../assets/img/restaurant-front.jpeg" alt="">
+                <div class="text-bloc">
+                    <p>Après plus de 10 ans d'existence, vous vous doutez bien que nous avions dû faire nos preuves.</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur animi magnam enim, at, nam id quas voluptas fuga eos aliquam voluptate beatae reiciendis harum quia unde iure nobis accusantium illo? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto laudantium quo officiis, itaque minus consequatur aut, totam ea modi repellendus nam! Minus inventore recusandae earum vero natus ipsum alias quisquam?</p>
                 </div>
-
-                <span class="testimony-prev" (click)="testimonyClickPrev()">&#10094;</span>
-                <span class="testimony-next" (click)="testimonyClickNext()">&#10095;</span>
-
             </div>
+
+            <div class="testimony-caroussel">
+
+                <div class="testimony-caroussel-hidder">
+
+                    <div class="testimony-caroussel-container">
+
+                        <div class="testimony-element" data-aos="fade-up" data-aos-duration="1000" *ngFor="let testimony of testimoniesArray" >
+                    
+                            <span class="testimony-element-title"> {{testimony.nom}} </span>
+
+                            <div class="testimony-element-message">
+                                        
+                                <span class="testimony-element-text-first-child"> {{testimony.message}} </span>
+                                
+                            </div>
+                            <span>étoiles</span>
+                        </div>
+                    </div>
+
+                    <span class="testimony-prev" (click)="testimonyClickPrev()">&#10094;</span>
+                    <span class="testimony-next" (click)="testimonyClickNext()">&#10095;</span>
+
+                </div>
+            </div>
+                
+            <span class="testimony-call-to-action" data-aos="fade-up"  >
+                Vous aussi, laissez-nous un avis
+                <button >Commentaire</button>
+            </span>
         </div>
-            
-        <span class="testimony-call-to-action" data-aos="fade-up"  >Laissez nous un commentaire</span>
 
     </section>
 
 
     <section id="contact" class="contact-bloc">
 
-        <div class="contact-header">
-            <img src="../../../assets/img/deco/left-gold.png" alt="Décoration de titre gauche">
-            <span>CONTACTEZ-NOUS</span>
-            <img src="../../../assets/img/deco/right-gold.png" alt="Décoration de titre droit">
-        </div>
+        <h3>Contactez-nous</h3>
 
         <div class="contact-bloc-info-form">
             <div class="contact-info" data-aos="fade-up" data-aos-duration="1000">
@@ -437,16 +433,17 @@
     </section>
 
 
-    <div *ngIf="apiLoaded | async">
-        <google-map height="500px" width="100%" [options]="options">
-            <map-marker #markerElem = "mapMarker"
-                [position]="marker.position" (mapClick)="openMapInfo(markerElem)">
-            </map-marker>
+    <div class="map" *ngIf="apiLoaded | async" >
 
-            <map-info-window >
-                <div [innerHTML]="marker.info"></div>
-            </map-info-window>
-        </google-map>
+            <google-map height="500px" width="100%" [options]="options">
+                <map-marker #markerElem = "mapMarker"
+                    [position]="marker.position" (mapClick)="openMapInfo(markerElem)">
+                </map-marker>
+    
+                <map-info-window >
+                    <div [innerHTML]="marker.info"></div>
+                </map-info-window>
+            </google-map>
     </div>
 
 </div>

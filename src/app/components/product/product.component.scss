@@ -1,0 +1,124 @@
+$colorBlue: #115F98;
+$colorRed: #E9121D;
+$colorGlod: #EEC66C;
+$colorBlack: #141414;
+$colorGreen: #046904;
+
+.product{
+    width: 270px;
+    height:fit-content;
+    margin: 0 10px 90px 10px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    transition: all .2s ease-in-out;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 70px 20px 20px 20px;
+    color: #00031f;
+
+    .image-plat{
+        position: absolute;
+        top: -70px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+    }
+
+    .titre-plat{
+        color: $colorRed;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+        text-align: center;
+    }
+
+    .description-plat{
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: justify;
+        line-height: 20px;
+        font-size: 0.95em;
+        font-weight: 400;
+    }
+
+    .prix-voir{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+
+
+        .prix-plat{
+            color: #00031f;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .voir-plat{
+
+            border:none;
+            outline:none;
+            background-color: #00031f;
+            border-radius: 100px;
+            width: fit-content;
+            color: white;
+            padding: 2px 10px;
+            font-size: 0.9em;
+            border: 2px solid #00031f;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .voir-plat:hover{
+            background-color: white;
+            color: #00031f;
+        }
+
+    }
+
+    
+}
+
+.product:hover{
+    background-color: #00031f;
+    color: white;
+
+    .image-plat{
+
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+    }
+
+    .titre-plat{
+        font-weight:400;
+
+    }
+
+    .prix-voir{
+
+
+        .prix-plat{
+            color: white;
+            color: $colorRed
+        }
+
+        .voir-plat{
+
+            background-color: white;
+            border: 2px solid white;
+            color: #00031f;
+
+        }
+
+        .voir-plat:hover{
+            background-color: white;
+            color: $colorRed;
+        }
+
+    }
+
+    
+}

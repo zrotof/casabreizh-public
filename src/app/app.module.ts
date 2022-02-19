@@ -13,6 +13,7 @@ import { ProduitComponent } from './components/produit/produit.component';
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routerOptions: ExtraOptions = {
     HomeComponent,
     ProduitComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

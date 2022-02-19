@@ -1,0 +1,10 @@
+<div class="product" *ngIf="product">
+    <img class="image-plat" src={{product.imageProduit}}>
+    <span class="titre-plat"> {{product.nomProduit}} </span>
+    <p class="description-plat"> {{product.descriptionProduit}} </p>
+
+    <div class="prix-voir">
+        <span class="prix-plat"> {{product.prixProduit}} </span>
+        <button class="voir-plat" (click)="openProduit()">Voir plus</button>
+    </div>
+</div>
